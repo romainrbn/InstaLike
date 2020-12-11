@@ -34,7 +34,7 @@ public class Main extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         addControlsToGrid(grid);
 
-        primaryStage.setScene(new Scene(grid, 600, 300));
+        primaryStage.setScene(new Scene(grid, 1700, 800));
 
         primaryStage.show();
     }
@@ -62,13 +62,13 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        try {
-            URL iconURL = Main.class.getResource("1024.png");
-            java.awt.Image image = new ImageIcon(iconURL).getImage();
-            com.apple.eawt.Application.getApplication().setDockIconImage(image);
-        } catch (Exception e) {
-            // Ne marche pas sur Windows et Linux
-        }
+//        try {
+//            URL iconURL = Main.class.getResource("1024.png");
+//            java.awt.Image image = new ImageIcon(iconURL).getImage();
+//            com.apple.eawt.Application.getApplication().setDockIconImage(image);
+//        } catch (Exception e) {
+//            // Ne marche pas sur Windows et Linux
+//        }
         launch(args);
     }
 }
