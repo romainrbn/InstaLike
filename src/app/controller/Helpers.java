@@ -1,11 +1,16 @@
 package app.controller;
 
 public class Helpers {
-    public static boolean checkString(String str) {
+
+    public static boolean checkStringForSignUp(String str) {
         char ch;
         boolean capitalFlag = false;
         boolean lowerCaseFlag = false;
         boolean numberFlag = false;
+
+        if (str.isEmpty() || str.length() < 6)
+            return false;
+
         for(int i=0;i < str.length();i++) {
             ch = str.charAt(i);
             if(Character.isDigit(ch)) {

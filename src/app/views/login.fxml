@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.Controller">
+<GridPane alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -57,6 +58,11 @@
                   </LinearGradient>
                </textFill>
             </Label>
+            <Label style="-fx-padding: 60 0 30 0;" text="Partagez vos photos avec vos amis !">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Label>
             <Label text="Nom d'utilisateur :" GridPane.rowIndex="2">
                <font>
                   <Font name="Arial Bold" size="14.0" />
@@ -91,7 +97,10 @@
                         </Stop>
                      </stops>
                   </LinearGradient>
-               </textFill></Button>
+               </textFill>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
             <Button id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.rowIndex="6">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">

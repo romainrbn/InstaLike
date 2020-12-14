@@ -2,13 +2,19 @@ package app.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-import java.util.regex.Pattern;
+import java.io.IOException;
 
 
-public class Controller {
+public class LoginController {
 
     @FXML private TextField userNameTextField;
     @FXML private PasswordField passwordTextField;
@@ -34,10 +40,29 @@ public class Controller {
 
         // Send to backend and get response.
 
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("main.fxml"));
+
+        Node source = (Node) event.getSource();
+        Stage sourceState = (Stage) source.getScene().getWindow();
+        sourceState.close();
+
+
+        try {
+            Parent root = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Accueil");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Boolean handleCheckPasswordOnSignUp(String pw) {
-        if(pw.isEmpty() || pw.length() < 6 || !Pattern.compile("[0-9]").matcher(pw).find() || !Helpers.checkString(pw)){
+        if(pw.isEmpty() || pw.length() < 6 || !Helpers.checkStringForSignUp(pw)){
             return false;
         }
         return true;
