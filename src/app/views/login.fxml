@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Label style="-fx-padding: 0 0 30 0;" text="Bienvenue sur InstaLike" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="25.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label text="Nom d'utilisateur :" GridPane.rowIndex="1">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Label>
+      <TextField fx:id="userNameTextField" promptText="\@ParkizApp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Mot de passe :" GridPane.rowIndex="2">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Label>
+      <PasswordField fx:id="passwordTextField" promptText="•••••••••" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button id="loginButton" fx:id="handleLogin" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Connexion" GridPane.columnIndex="0" GridPane.rowIndex="4">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <Button id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.columnIndex="0" GridPane.rowIndex="5">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
+      <Button id="forgotPasswordButton" fx:id="forgotPasswordButton" mnemonicParsing="false" onAction="#handleForgotPassword" style="-fx-background-color: rgba(117, 190, 218, 0.0);" text="Mot de passe oublié ?" textFill="#23a1e4" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <font>
+            <Font size="9.0" />
+         </font></Button>
+   </children>
+</GridPane>
