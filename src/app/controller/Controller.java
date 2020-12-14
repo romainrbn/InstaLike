@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+
+
 public class Controller {
 
     @FXML private TextField userNameTextField;
@@ -13,7 +15,7 @@ public class Controller {
     @FXML
     public void handleLogin(ActionEvent event) {
         System.out.println("Handle login with " + userNameTextField.getText() + " and " + passwordTextField.getText());
-        // La bite de Jean
+
         // Send to backend and get response
     }
 
