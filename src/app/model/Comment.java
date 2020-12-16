@@ -1,5 +1,6 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -58,5 +59,14 @@ public class Comment {
 
     public void setCommentId(int commentId) {
         this.commentId = commentId;
+    }
+
+    public static List<Comment> generateExampleComments() {
+        List<Comment> comments = new ArrayList<>();
+        for (int i = 0 ; i < 10 ; i++) {
+            comments.add(new Comment(i, "Jolie Photo !", User.generateExampleUser(),
+                    Like.generateRandomLikes(), new Date()));
+        }
+        return comments;
     }
 }

@@ -1,5 +1,6 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -108,4 +109,5 @@ public class Post {
     public enum PostState {
         POSTED, DELETED
     }
+
 }

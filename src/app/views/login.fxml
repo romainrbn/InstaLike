@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
+<GridPane style="-fx-background-color: #ffffff;" stylesheets="@login.css" alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -73,7 +73,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font></Label>
             <PasswordField fx:id="passwordTextField" promptText="•••••••••" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button id="loginButton" fx:id="handleLogin" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Connexion" GridPane.rowIndex="5">
+            <Button fx:id="handleLogin" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Connexion" GridPane.rowIndex="5">
                <font>
                   <Font name="Arial Bold" size="14.0" />
                </font>
@@ -101,7 +101,7 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Button>
-            <Button id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.rowIndex="6">
+            <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.rowIndex="6">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>

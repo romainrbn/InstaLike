@@ -16,12 +16,17 @@ public class LoginView extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        primaryStage.setTitle("InstaLike");
+        primaryStage.setTitle("Connexion et Inscription");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
-        primaryStage.setScene(new Scene(root, 600, 800));
+        primaryStage.setScene(new Scene(root, 800, 800));
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(800);
         primaryStage.show();
     }
 
+    private void addElementsToStage(Stage stage) {
+
+    }
 
     public static void main(String[] args) {
         try {

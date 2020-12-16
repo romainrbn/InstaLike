@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<SplitPane fx:id="splitPane" dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.MainController">
+  <items>
+    <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <VBox fx:id="LeftStack" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+          <children>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0">
+                    <children>
+                      <ImageView accessibleText="InstaLike Logo" fitHeight="75.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="logoImageView">
+                        <image>
+                          <Image url="@LogoInstaLike.png" />
+                        </image>
+                      </ImageView>
+                    </children>
+                    <padding>
+                      <Insets bottom="30.0" left="0.0" right="0.0" top="0.0" />
+                    </padding>
+                  </StackPane>
+            <Button fx:id="homeButton" accessibleText="Retourner à l'accueil" alignment="CENTER" mnemonicParsing="false" onAction="#handleSetHome" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Accueil" textAlignment="RIGHT">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font></Button>
+            <Button fx:id="accountButton" accessibleText="Accéder au compte" mnemonicParsing="false" onAction="#handleAccount" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Compte" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font></Button>
+            <Button fx:id="signOutButton" accessibleText="Déconnexion" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Déconnexion" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font></Button>
+
+              <Region VBox.vgrow="ALWAYS"> </Region>
+              <Label style="-fx-label-padding: 0 10 30 10;" text="© 2021 LE DIZÈS Thibault, LEBLED Arthur, LAURENT Antoine, LEFAY Paul, RABOUAN Romain, GISLARD Paulin" textAlignment="CENTER" underline="true" wrapText="true">
+                     <font>
+                        <Font size="9.0" />
+                     </font></Label>
+
+          </children>
+        </VBox>
+      </children>
+    </AnchorPane>
+
+
+    <AnchorPane fx:id="lightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <children>
+        <ScrollPane fx:id="RightScroll" prefHeight="398.0" prefWidth="416.0">
+          <content>
+
+                        <VBox fx:id="postsBox" alignment="TOP_CENTER" layoutX="199.0" layoutY="23.0" spacing="15" style="-fx-padding: 30 0 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                           <children>
+
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+                               <Button mnemonicParsing="false" text="Button" />
+
+                           </children>
+                        </VBox>
+
+
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+
+  </items>
+</SplitPane>

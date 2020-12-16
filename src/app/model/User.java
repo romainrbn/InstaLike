@@ -1,21 +1,23 @@
 package app.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class User {
-    private int         id;
-    private String      description;
-    private String      profilePicture;
-    private String      username;
-    private String      friendlyName;
-    private List<User>  followers;
-    private List<User>  following;
-    private Date        signUpTime;
+    private int             id;
+    private String          description;
+    private String          profilePicture;
+    private String          username;
+    private String          friendlyName;
+    private List<Integer>   followers;
+    private List<Integer>   following;
+    private Date signUpDate;
 
     public User(int id, String description, String profilePicture, String username, String friendlyName,
-                List<User> followers, List<User> following, Date signUpTime) {
+                List<Integer> followers, List<Integer> following, Date signUpDate) {
         this.id                 = id;
         this.description        = description;
         this.profilePicture     = profilePicture;
@@ -23,7 +25,7 @@ public class User {
         this.friendlyName       = friendlyName;
         this.followers          = followers;
         this.following          = following;
-        this.signUpTime         = signUpTime;
+        this.signUpDate         = signUpDate;
     }
 
     public int getId() {
@@ -66,27 +68,54 @@ public class User {
         this.friendlyName = friendlyName;
     }
 
-    public List<User> getFollowers() {
+    public List<Integer> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<User> followers) {
+    public void setFollowers(List<Integer> followers) {
         this.followers = followers;
     }
 
-    public List<User> getFollowing() {
+    public List<Integer> getFollowing() {
         return following;
     }
 
-    public void setFollowing(List<User> following) {
+    public void setFollowing(List<Integer> following) {
         this.following = following;
     }
 
-    public Date getSignUpTime() {
-        return signUpTime;
+    public Date getSignUpDate() {
+        return signUpDate;
     }
 
-    public void setSignUpTime(Date signUpTime) {
-        this.signUpTime = signUpTime;
+    public void setSignUpDate(Date signUpDate) {
+        this.signUpDate = signUpDate;
     }
+
+    public static User generateExampleUser() {
+        int id = 10;
+        String description      = "Super description";
+        String profilePicture   = "https://parkiz.app/";
+        String username         = "@romainrbn";
+        String friendlyName     = "Romain";
+        List<Integer> followers = new ArrayList<>();
+        followers.add(10);
+        followers.add(193);
+        followers.add(42);
+        List<Integer> following = new ArrayList<>();
+        following.add(293);
+        following.add(183);
+        following.add(284);
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            date = format.parse("2018/03/17 19:29:56");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        User exampleUser = new User(id, description, profilePicture, username, friendlyName, followers, following, date);
+        return exampleUser;
+    }
+
+
 }

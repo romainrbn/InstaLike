@@ -1,18 +1,20 @@
 package app.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 public class Like extends User {
 
-    private int     likeId;
-    private Date    publishTime;
+    private int likeId;
+    private Date publishTime;
+    private User user;
 
     public Like(User user, int likeId, Date publishTime) {
-        super(user.getId(), user.getDescription(), user.getProfilePicture(), user.getUsername(), user.getFriendlyName(), user.getFollowers(), user.getFollowing(), user.getSignUpTime());
+        super(user.getId(), user.getDescription(), user.getProfilePicture(), user.getUsername(), user.getFriendlyName(), user.getFollowers(), user.getFollowing(), user.getSignUpDate());
         this.publishTime = publishTime;
-        this.likeId      = likeId;
+        this.likeId = likeId;
     }
 
     public Date getPublishTime() {
@@ -29,5 +31,13 @@ public class Like extends User {
 
     public void setLikeId(int likeId) {
         this.likeId = likeId;
+    }
+
+    public static List<Like> generateRandomLikes() {
+        List<Like> likes = new ArrayList<>();
+        for(int i=0;i<25;i++) {
+            likes.add(new Like(User.generateExampleUser(), i, new Date()));
+        }
+        return likes;
     }
 }

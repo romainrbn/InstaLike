@@ -1,0 +1,15 @@
+.button:hover {
+    -fx-background-color: rgba(255, 196, 233, 0.4);
+    -fx-background-radius: 10px;
+    -fx-text-base-color: rgb(248, 19, 111);
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-text-base-color: black;
+}
+
+/* Modifier taille divider du split pane */
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 0.05em 0 0.05em;
+}
