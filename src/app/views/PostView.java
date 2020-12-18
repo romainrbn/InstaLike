@@ -49,13 +49,13 @@ public class PostView extends Application {
     }
 
     public static void main(String[] args) {
-        try {
-            URL iconURL = LoginView.class.getResource("LogoInstaLike.png");
-            java.awt.Image image = new ImageIcon(iconURL).getImage();
-            com.apple.eawt.Application.getApplication().setDockIconImage(image);
-        } catch (Exception e) {
-            // Ne marche pas sur Windows et Linux
-        }
+//        try {
+//            URL iconURL = LoginView.class.getResource("LogoInstaLike.png");
+//            java.awt.Image image = new ImageIcon(iconURL).getImage();
+//            com.apple.eawt.Application.getApplication().setDockIconImage(image);
+//        } catch (Exception e) {
+//            // Ne marche pas sur Windows et Linux
+//        }
         launch(args);
     }
 }

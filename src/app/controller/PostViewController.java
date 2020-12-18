@@ -48,12 +48,12 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
-        FileInputStream input = new FileInputStream("controller/defaultPostImage.PNG");
+        FileInputStream input = new FileInputStream("src/app/views/default_pp.png");
         Image postImage = new Image(input);
         postImageView.setImage(postImage);
         PixelReader reader = postImage.getPixelReader();
         WritableImage newImage = new WritableImage(reader, 0, 0, 350, 350);
-        postImageView.setImage(newImage);
+        //postImageView.setImage(newImage);
     }
 
     public void setLabel() {
