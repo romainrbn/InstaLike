@@ -1,6 +1,8 @@
 package app.views;
 
+import app.controller.PostViewController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,9 +30,9 @@ public class MainView extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
-        Scene scene = new Scene(root, 1000, 800);
+        Scene scene = new Scene(root, 1150, 800);
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(1000);
+        primaryStage.setMinWidth(1150);
         primaryStage.setMinHeight(800);
         primaryStage.show();
 
@@ -38,7 +40,7 @@ public class MainView extends Application {
 
     }
 
-    private void setupUI(FXMLLoader loader) {
+    private void setupUI(FXMLLoader loader) throws Exception {
         AnchorPane rightPane = (AnchorPane) loader.getNamespace().get("rightPane");
         AnchorPane leftPane = (AnchorPane) loader.getNamespace().get("leftPane");
 
@@ -60,6 +62,19 @@ public class MainView extends Application {
 
         VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
+        for (int i = 0; i < 10 ; i++) {
+            // posts.get(i)
+
+            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("PostView.fxml"));
+
+            PostViewController controller = postViewLoader.getController();
+       //     controller.initialize();
+         //   controller.setAuthor(posts.get(i).getAuthor());
+
+            Parent postViewRoot = postViewLoader.load();
+            postViewRoot.setId(Integer.toString(i));
+            postsBox.getChildren().add(postViewRoot);
+        }
 
     }
 
