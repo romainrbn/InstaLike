@@ -46,6 +46,16 @@ public class LoginController implements Initializable {
         System.out.println("Handle login with " + userNameTextField.getText() + " and " + passwordTextField.getText());
 
         // Send to backend and get response
+
+        Node source = (Node) event.getSource();
+        Stage sourceState = (Stage) source.getScene().getWindow();
+        sourceState.close();
+
+        try {
+            runAnotherApp(MainView.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

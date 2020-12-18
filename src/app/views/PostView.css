@@ -1,0 +1,14 @@
+.toggle-button {
+    -fx-graphic: url("../resources/icons/heart.png");
+    -fx-background-color: transparent;
+}
+
+.toggle-button:selected {
+    -fx-graphic: url("../resources/icons/heart_full.png");
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-graphic: url("../resources/icons/comment.png");
+    -fx-background-color: transparent;
+}
