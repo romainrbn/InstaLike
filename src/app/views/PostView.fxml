@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ededed;" stylesheets="@PostView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PostViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #ededed;" stylesheets="@PostView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PostViewController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;">
          <children>
@@ -43,19 +43,29 @@
                <children>
                   <Region VBox.vgrow="ALWAYS"> </Region>
                   <ImageView fx:id="postImageView" fitHeight="440.0" fitWidth="561.0" pickOnBounds="true" preserveRatio="true">
-
                   </ImageView>
-
                </children>
             </HBox>
-
          </children>
       </VBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-padding: 30 0 0 30;">
+
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15" style="-fx-padding: 30 30 0 30;">
          <children>
-            <ToggleButton fx:id="likeButton" style="-fx-background-color: transparent;" />
-            <Button fx:id="commentButton" style="-fx-background-color: transparent;" />
+            <Label fx:id="descriptionLabel" style="-fx-padding: 0 0 0 10" text="Ma super description">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></Label>
+            <HBox prefWidth="200.0">
+               <children>
+                  <ToggleButton fx:id="likeButton" style="-fx-background-color: transparent;" />
+                  <Button fx:id="commentButton" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
+            <Label fx:id="likesCountLabel" style="-fx-padding: 0 0 0 10" text="13 J'aime">
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font></Label>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </VBox>

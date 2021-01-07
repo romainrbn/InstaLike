@@ -20,7 +20,7 @@ public class PostTests {
         // Generate a mockup post for testing.
         post = new Post(1, User.generateExampleUser(), "https://www.google.com", new Date(),
                 Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
-                Post.PostState.POSTED, true);
+                Post.PostState.POSTED, true, "Ma super description");
     }
 
     @Test

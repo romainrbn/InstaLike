@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 
 public class PostViewController implements Initializable {
 
+    private Post post;
 
     @FXML
     public ImageView postImageView;
@@ -26,12 +27,16 @@ public class PostViewController implements Initializable {
     @FXML Label locationLabel;
     @FXML ImageView profileImageView;
     @FXML ToggleButton likeButton;
+    @FXML Label descriptionLabel;
+    @FXML Label likesCountLabel;
 
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        post = Post.generateExamplePost();// Chargement réseau
 
         likeButton.setOnMouseEntered(e -> likeButton.setStyle(HOVER_BUTTON_STYLE));
         likeButton.setOnMouseExited(e -> likeButton.setStyle(IDLE_BUTTON_STYLE));
@@ -43,6 +48,9 @@ public class PostViewController implements Initializable {
         }
         setAuthorLabel();
         setLocationLabel();
+        setLikesCountLabel();
+        setDescriptionLabel();
+        setProfileImageView();
         maskRoundImage();
     }
 
@@ -60,18 +68,32 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
-        FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
-        Image postImage = new Image(input);
-
+        String url =  "https://cdn.maikoapp.com/3d4b/4qgko/p200.jpg";
+      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
+        Image postImage = new Image(url);
         postImageView.setImage(postImage);
     }
 
+    public void setProfileImageView() {
+        String url = post.getAuthor().getProfilePicture();
+        Image profileImage = new Image(url);
+        profileImageView.setImage(profileImage);
+    }
+
     public void setAuthorLabel() {
-        usernameLabel.setText("Arthur_Lebled");
+        usernameLabel.setText(post.getAuthor().getFriendlyName());
+    }
+
+    private void setLikesCountLabel() {
+        likesCountLabel.setText(post.getLikesList().size() + " J'aime");
+    }
+
+    private void setDescriptionLabel() {
+        descriptionLabel.setText(post.getDescription());
     }
 
     public void setLocationLabel() {
-        locationLabel.setText("Norway");
+        locationLabel.setText(post.getLocalisation());
     }
 
     private void maskRoundImage() {

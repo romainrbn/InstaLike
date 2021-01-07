@@ -2,24 +2,15 @@ package app.views;
 
 import app.controller.PostViewController;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.net.URL;
 
 public class MainView extends Application {
 
@@ -62,14 +53,10 @@ public class MainView extends Application {
 
         VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
-        for (int i = 0; i < 10 ; i++) {
-            // posts.get(i)
-
+        for (int i = 0; i < 5 ; i++) {
             FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("PostView.fxml"));
 
             PostViewController controller = postViewLoader.getController();
-       //     controller.initialize();
-         //   controller.setAuthor(posts.get(i).getAuthor());
 
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));

@@ -95,7 +95,7 @@ public class User {
     public static User generateExampleUser() {
         int id = 10;
         String description      = "Super description";
-        String profilePicture   = "https://parkiz.app/";
+        String profilePicture   = "https://cdn.maikoapp.com/3d4b/4quqa/150.jpg";
         String username         = "@romainrbn";
         String friendlyName     = "Romain";
         List<Integer> followers = new ArrayList<>();

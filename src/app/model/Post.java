@@ -19,9 +19,10 @@ public class Post {
     // Sert a determiner si afficher pour recharger a partir de la db.
     // ! ordre chronologie
     private Boolean         displayed;
+    private String          description;
 
     public Post(int postId, User author, String photoURL, Date publishTime, List<Comment> commentsList, List<Like>
-            likesList, String localisation, PostState state, Boolean displayed) {
+            likesList, String localisation, PostState state, Boolean displayed, String description) {
         this.postId         = postId;
         this.author         = author;
         this.photoURL       = photoURL;
@@ -31,6 +32,7 @@ public class Post {
         this.localisation   = localisation;
         this.state          = state;
         this.displayed      = displayed;
+        this.description    = description;
     }
 
 
@@ -106,8 +108,22 @@ public class Post {
         this.postId = postId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public enum PostState {
         POSTED, DELETED
+    }
+
+    public static Post generateExamplePost() {
+        return new Post(1, User.generateExampleUser(), "https://www.google.com", new Date(),
+                Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
+                Post.PostState.POSTED, true, "Ma super description");
     }
 
 }

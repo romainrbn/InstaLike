@@ -1,9 +1,14 @@
 package app.controller;
 
+import app.views.LoginView;
+import app.views.MainView;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,6 +46,20 @@ public class MainController implements Initializable {
     @FXML
     public void handleLogout(ActionEvent event) {
         System.out.println("sign out");
+        Node source = (Node) event.getSource();
+        Stage sourceState = (Stage) source.getScene().getWindow();
+        sourceState.close();
+
+        try {
+            runAnotherApp(LoginView.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    public void runAnotherApp(Class<? extends Application> anotherAppClass) throws Exception{
+        Application application = anotherAppClass.newInstance();
+        Stage anotherStage = new Stage();
+        application.start(anotherStage);
+    }
 }
