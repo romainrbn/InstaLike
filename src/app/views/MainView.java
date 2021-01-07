@@ -56,8 +56,6 @@ public class MainView extends Application {
         for (int i = 0; i < 5 ; i++) {
             FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("PostView.fxml"));
 
-            PostViewController controller = postViewLoader.getController();
-
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));
             postsBox.getChildren().add(postViewRoot);
