@@ -7,30 +7,10 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane style="-fx-background-color: #ffffff;" stylesheets="@../views/login.css" alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<GridPane style="-fx-background-color: #ffffff;" stylesheets="@../css/login.css" alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
    <children>
 
       <GridPane alignment="TOP_CENTER" hgap="10" prefHeight="800" prefWidth="600" style="-fx-padding: 20 0 0 0;" vgap="10" GridPane.rowIndex="1" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
          <children>
             <Label alignment="CENTER" style="-fx-padding: 0 0 30 0;" text="Bienvenue sur InstaLike" textAlignment="CENTER">
                <font>
@@ -100,7 +80,8 @@
                </textFill>
                <opaqueInsets>
                   <Insets />
-               </opaqueInsets></Button>
+               </opaqueInsets>
+            </Button>
             <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.rowIndex="6">
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">

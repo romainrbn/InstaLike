@@ -62,15 +62,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleAddPicture(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choisir une photo à publier");
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg");
-        fileChooser.getExtensionFilters().add(extFilter);
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            Helpers.openPopUp();
-            System.out.println(file.getPath());
-        }
+        Helpers.openPopUp("AddPost");
     }
 
 

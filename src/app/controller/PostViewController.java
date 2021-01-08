@@ -113,7 +113,7 @@ public class PostViewController implements Initializable {
     }
 
     public void handleComments() throws IOException {
-        Helpers.openPopUp();
+        Helpers.openPopUp("AddPost");
     }
 }
 

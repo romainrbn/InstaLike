@@ -34,9 +34,9 @@ public class Helpers {
         return false;
     }
 
-    public static void openPopUp() throws IOException {
+    public static void openPopUp(String fichier) throws IOException {
         final Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(Helpers.class.getResource("../fxml/PostView.fxml"));
+        FXMLLoader loader = new FXMLLoader(Helpers.class.getResource("../fxml/"+fichier+".fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
         Scene scene = new Scene(root, 850, 650);
