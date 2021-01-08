@@ -116,6 +116,22 @@ public class Post {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", author=" + author.toString() +
+                ", photoURL='" + photoURL + '\'' +
+                ", publishTime=" + publishTime +
+                ", commentsList=" + commentsList +
+                ", likesList=" + likesList +
+                ", localisation='" + localisation + '\'' +
+                ", state=" + state +
+                ", displayed=" + displayed +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     public enum PostState {
         POSTED, DELETED
     }
@@ -125,5 +141,7 @@ public class Post {
                 Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
                 Post.PostState.POSTED, true, "Ma super description");
     }
+
+
 
 }

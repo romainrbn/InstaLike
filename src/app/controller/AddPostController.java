@@ -1,16 +1,19 @@
 package app.controller;
 
+import app.model.Post;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AddPostController implements Initializable {
 
@@ -20,6 +23,8 @@ public class AddPostController implements Initializable {
     @FXML private Button sendPost;
     @FXML private TextField localisationTextField;
     @FXML private TextArea descriptionTextArea;
+
+    private String fileURL;
 
 
     @Override
@@ -37,6 +42,7 @@ public class AddPostController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             System.out.println(file.getPath());
+            fileURL = file.getPath();
         }
     }
 
@@ -45,5 +51,14 @@ public class AddPostController implements Initializable {
         String localisation = localisationTextField.getText();
         String description = descriptionTextArea.getText();
 
+        if(localisation == null || LoginController.currentUser == null || fileURL == null)
+            return;
+
+        Post post = new Post(0, LoginController.currentUser, fileURL, new Date(), new ArrayList<>(), new ArrayList<>(), localisation, Post.PostState.POSTED, true, description);
+        System.out.println(post.toString());
+
+        Node source = (Node) event.getSource();
+        Stage sourceState = (Stage) source.getScene().getWindow();
+        sourceState.close();
     }
 }

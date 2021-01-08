@@ -42,7 +42,7 @@
                      </font></Button>
 
               <Region VBox.vgrow="ALWAYS"> </Region>
-              <Label style="-fx-label-padding: 0 10 30 10;" text="© 2021 LE DIZÈS Thibault, LEBLED Arthur, LAURENT Antoine, LEFAY Paul, RABOUAN Romain, GISLARD Paulin" textAlignment="CENTER" underline="true" wrapText="true">
+              <Label style="-fx-label-padding: 0 10 30 10;" text="© 2021 LE DIZÈS Thibaut, LEBLED Arthur, LAURENT Antoine, LEFAY Paul, RABOUAN Romain, GISLARD Paulin" textAlignment="CENTER" underline="true" wrapText="true">
                      <font>
                         <Font size="9.0" />
                      </font></Label>

@@ -37,7 +37,35 @@
             <Insets top="70.0" />
          </VBox.margin>
         </Label>
-        <Button fx:id="fileChooser" onAction="#handleFileChooser"></Button>
+        <Button fx:id="fileChooser" mnemonicParsing="false" onAction="#handleFileChooser" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Sélectionner une photo" >
+            <font>
+                <Font name="Arial Bold" size="14.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.007532956685499058">
+                            <color>
+                                <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </Button>
         <GridPane alignment="TOP_CENTER" hgap="10" prefHeight="800" prefWidth="600" style="-fx-padding: 20 0 0 0;" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
             <children>
                 <Label text="Description : " GridPane.rowIndex="2">

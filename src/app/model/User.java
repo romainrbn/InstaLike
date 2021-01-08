@@ -118,4 +118,17 @@ public class User {
     }
 
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", profilePicture='" + profilePicture + '\'' +
+                ", username='" + username + '\'' +
+                ", friendlyName='" + friendlyName + '\'' +
+                ", followers=" + followers +
+                ", following=" + following +
+                ", signUpDate=" + signUpDate +
+                '}';
+    }
 }

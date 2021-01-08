@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.model.User;
 import app.views.LoginView;
 import app.views.MainView;
 import javafx.application.Application;
@@ -32,6 +33,8 @@ public class LoginController implements Initializable {
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
 
+    public static User currentUser;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         signUpButton.setOnMouseEntered(e -> signUpButton.setStyle(HOVER_BUTTON_STYLE));
@@ -51,6 +54,8 @@ public class LoginController implements Initializable {
         Stage sourceState = (Stage) source.getScene().getWindow();
         sourceState.close();
 
+        currentUser = User.generateExampleUser();
+
         try {
             runAnotherApp(MainView.class);
         } catch (Exception e) {
@@ -65,6 +70,8 @@ public class LoginController implements Initializable {
             System.out.println("Le mot de passe doit contenir au moins 6 caractères, une majuscule et un chiffre.");
             return;
         }
+
+        currentUser = User.generateExampleUser();
 
         System.out.println("Handle sign up succeed with " + userNameTextField.getText() + " and " + passwordTextField.getText());
 
