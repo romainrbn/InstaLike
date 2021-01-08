@@ -1,5 +1,12 @@
 package app.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 public class Helpers {
 
     public static boolean checkStringForSignUp(String str) {
@@ -25,5 +32,15 @@ public class Helpers {
                 return true;
         }
         return false;
+    }
+
+    public static void openPopUp() throws IOException {
+        final Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(Helpers.class.getResource("../fxml/PostView.fxml"));
+        Parent root = loader.load();
+        primaryStage.setTitle("InstaLike");
+        Scene scene = new Scene(root, 850, 650);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

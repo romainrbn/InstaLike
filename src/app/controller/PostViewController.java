@@ -4,15 +4,21 @@ import app.model.Post;
 import app.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,8 +33,10 @@ public class PostViewController implements Initializable {
     @FXML Label locationLabel;
     @FXML ImageView profileImageView;
     @FXML ToggleButton likeButton;
+    @FXML Button commentButton;
     @FXML Label descriptionLabel;
     @FXML Label likesCountLabel;
+
 
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
@@ -102,6 +110,10 @@ public class PostViewController implements Initializable {
         maskCircle.setCenterY((profileImageView.getFitHeight() / 2) - 4);
         maskCircle.setRadius(profileImageView.getFitWidth() / 2);
         profileImageView.setClip(maskCircle);
+    }
+
+    public void handleComments() throws IOException {
+        Helpers.openPopUp();
     }
 }
 

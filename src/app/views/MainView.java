@@ -1,6 +1,5 @@
 package app.views;
 
-import app.controller.PostViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,7 @@ public class MainView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
@@ -54,7 +53,7 @@ public class MainView extends Application {
         VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
         for (int i = 0; i < 5 ; i++) {
-            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("PostView.fxml"));
+            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("../fxml/PostView.fxml"));
 
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));

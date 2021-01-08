@@ -7,15 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.net.URL;
-
 public class LoginView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/login.fxml"));
         primaryStage.setTitle("Connexion et Inscription");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
         primaryStage.setScene(new Scene(root, 800, 800));
