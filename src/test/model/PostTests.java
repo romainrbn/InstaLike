@@ -25,6 +25,5 @@ public class PostTests {
 
     @Test
     public void testConstructor() {
-
     }
 }

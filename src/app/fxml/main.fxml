@@ -28,10 +28,6 @@
                      <font>
                         <Font name="Arial Bold" size="18.0" />
                      </font></Button>
-            <Button fx:id="accountButton" accessibleText="Accéder au compte" mnemonicParsing="false" onAction="#handleAccount" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Compte" textAlignment="CENTER">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font></Button>
               <Button fx:id="addButton" accessibleText="Ajouter une photo" mnemonicParsing="false" onAction="#handleAddPicture" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Ajouter une photo" textAlignment="CENTER">
                   <font>
                       <Font name="Arial Bold" size="18.0" />

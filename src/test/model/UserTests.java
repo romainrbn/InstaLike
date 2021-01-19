@@ -15,22 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserTests {
 
     User user;
-    List<Integer> followers;
-    List<Integer> following;
     Date date;
 
     @BeforeEach
     public void setUp() {
-        followers = new ArrayList<>();
-        followers.add(448);
-        followers.add(4);
-        followers.add(3949);
-
-        following = new ArrayList<>();
-        following.add(923);
-        following.add(394);
-        following.add(91203);
-
         int id                  = 42;
         String profilePicture   = "https://www.parkiz.app/mygreatbackend?profilepicture";
         String description      = "Salut les copains.";
@@ -41,7 +29,7 @@ public class UserTests {
         try {
             date = format.parse("2018/03/17 19:29:56");
 
-            user = new User(id, description, profilePicture, username, friendlyName, followers, following, date);
+            user = new User(id, description, profilePicture, username, friendlyName, date);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -69,15 +57,6 @@ public class UserTests {
         assertEquals("Romain",
                 user.getFriendlyName(),
                 "Le nom est faux.");
-
-        assertEquals(followers,
-                user.getFollowers(),
-                "La liste de followers est fausse.");
-
-        assertEquals(following,
-                user.getFollowing(),
-                "La liste de following est fausse.");
-
         assertEquals(date,
                 user.getSignUpDate(),
                 "La date de création du compte est fausse.");
@@ -98,7 +77,6 @@ public class UserTests {
                 user.getId(),
                 "L'identifiant est faux");
     }
-
 
     @Test
     public void testAccessorProfilePictureURL() {
@@ -122,27 +100,5 @@ public class UserTests {
         assertEquals("Arthur Lebled",
                 user.getFriendlyName(),
                 "Le friendly name est faux");
-    }
-
-    @Test
-    public void testAccessorFollowers() {
-        List<Integer> followers = new ArrayList<>();
-        followers.add(20);
-        followers.add(290);
-        followers.add(167);
-
-        user.setFollowers(followers);
-        assertEquals(followers, user.getFollowers(), "La liste de followers est fausse.");
-    }
-
-    @Test
-    public void testAccessorFollowing() {
-        List<Integer> following = new ArrayList<>();
-        following.add(78);
-        following.add(27);
-        following.add(42);
-
-        user.setFollowers(following);
-        assertEquals(following, user.getFollowers(), "La liste de followers est fausse.");
     }
 }

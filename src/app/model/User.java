@@ -12,19 +12,14 @@ public class User {
     private String          profilePicture;
     private String          username;
     private String          friendlyName;
-    private List<Integer>   followers;
-    private List<Integer>   following;
     private Date signUpDate;
 
-    public User(int id, String description, String profilePicture, String username, String friendlyName,
-                List<Integer> followers, List<Integer> following, Date signUpDate) {
+    public User(int id, String description, String profilePicture, String username, String friendlyName, Date signUpDate) {
         this.id                 = id;
         this.description        = description;
         this.profilePicture     = profilePicture;
         this.username           = username;
         this.friendlyName       = friendlyName;
-        this.followers          = followers;
-        this.following          = following;
         this.signUpDate         = signUpDate;
     }
 
@@ -68,22 +63,6 @@ public class User {
         this.friendlyName = friendlyName;
     }
 
-    public List<Integer> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<Integer> followers) {
-        this.followers = followers;
-    }
-
-    public List<Integer> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(List<Integer> following) {
-        this.following = following;
-    }
-
     public Date getSignUpDate() {
         return signUpDate;
     }
@@ -113,7 +92,7 @@ public class User {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        User exampleUser = new User(id, description, profilePicture, username, friendlyName, followers, following, date);
+        User exampleUser = new User(id, description, profilePicture, username, friendlyName, date);
         return exampleUser;
     }
 
@@ -126,8 +105,6 @@ public class User {
                 ", profilePicture='" + profilePicture + '\'' +
                 ", username='" + username + '\'' +
                 ", friendlyName='" + friendlyName + '\'' +
-                ", followers=" + followers +
-                ", following=" + following +
                 ", signUpDate=" + signUpDate +
                 '}';
     }
