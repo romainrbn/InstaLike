@@ -58,9 +58,9 @@ public class AddPostController implements Initializable {
         Connection connection = null;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String mysqlUrl = "jdbc:mysql://192.168.4.187:5678/";
-            connection = DriverManager.getConnection(mysqlUrl, "ldcss1rabou", "romain");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String mysqlUrl = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            connection = DriverManager.getConnection(mysqlUrl,"root","");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);
         }

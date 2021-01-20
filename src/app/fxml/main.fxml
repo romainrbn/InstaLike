@@ -55,11 +55,6 @@
 
                         <VBox fx:id="postsBox" alignment="TOP_CENTER" layoutX="199.0" layoutY="23.0" spacing="15" style="-fx-padding: 30 0 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                            <children>
-                               <!--<fx:include fx:id="someId"  source="PostView.fxml"/>
-                               <fx:include fx:id="someId2" source="PostView.fxml"/>
-                               <fx:include fx:id="someId3" source="PostView.fxml"/>
-                               <fx:include fx:id="someId4" source="PostView.fxml"/>
-                               <fx:include fx:id="someId5" source="PostView.fxml"/>-->
                            </children>
                         </VBox>
           </content>
