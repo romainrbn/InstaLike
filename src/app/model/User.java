@@ -8,15 +8,13 @@ import java.util.List;
 
 public class User {
     private int             id;
-    private String          description;
     private String          profilePicture;
     private String          username;
     private String          friendlyName;
     private Date signUpDate;
 
-    public User(int id, String description, String profilePicture, String username, String friendlyName, Date signUpDate) {
+    public User(int id, String profilePicture, String username, String friendlyName, Date signUpDate) {
         this.id                 = id;
-        this.description        = description;
         this.profilePicture     = profilePicture;
         this.username           = username;
         this.friendlyName       = friendlyName;
@@ -29,14 +27,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getProfilePicture() {
@@ -92,7 +82,7 @@ public class User {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        User exampleUser = new User(id, description, profilePicture, username, friendlyName, date);
+        User exampleUser = new User(id, profilePicture, username, friendlyName, date);
         return exampleUser;
     }
 
@@ -101,7 +91,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                '\'' +
                 ", profilePicture='" + profilePicture + '\'' +
                 ", username='" + username + '\'' +
                 ", friendlyName='" + friendlyName + '\'' +

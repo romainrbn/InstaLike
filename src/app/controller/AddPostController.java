@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -58,8 +59,8 @@ public class AddPostController implements Initializable {
         Connection connection = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String mysqlUrl = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            Class.forName("com.mysql.jdbc.Driver");
+            String mysqlUrl = "jdbc:mysql://localhost/LDCSS_dev?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             connection = DriverManager.getConnection(mysqlUrl,"root","");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);
@@ -81,9 +82,14 @@ public class AddPostController implements Initializable {
             inputStream = new FileInputStream(image);
 
             connection = getConnection();
-            statement = connection.prepareStatement("insert into testImages(img_title, img_data) " + "values(?,?)");
-            statement.setString(1, "Image de test");
-            statement.setBinaryStream(2, (InputStream) inputStream, (int) (image.length()));
+
+            String sqlRequest = "insert into posts(postID, userID, photoID, publishDate) " + "values(?,?,?,?)";
+
+            statement = connection.prepareStatement(sqlRequest);
+//            statement.setString(1, "Image de test");
+            statement.setInt(2, 9);
+            statement.setInt(3, 10);
+            statement.setDate(4, new Date(2021, 1, 20));
             statement.executeUpdate();
 
         } catch (FileNotFoundException e) {

@@ -21,7 +21,6 @@ public class UserTests {
     public void setUp() {
         int id                  = 42;
         String profilePicture   = "https://www.parkiz.app/mygreatbackend?profilepicture";
-        String description      = "Salut les copains.";
         String username         = "@romainrbn";
         String friendlyName     = "Romain";
 
@@ -29,7 +28,7 @@ public class UserTests {
         try {
             date = format.parse("2018/03/17 19:29:56");
 
-            user = new User(id, description, profilePicture, username, friendlyName, date);
+            user = new User(id, profilePicture, username, friendlyName, date);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -42,9 +41,6 @@ public class UserTests {
                 user.getId(),
                 "L'identifiant est faux");
 
-        assertEquals("Salut les copains.",
-                user.getDescription(),
-                "La description est fausse");
 
         assertEquals("https://www.parkiz.app/mygreatbackend?profilepicture",
                 user.getProfilePicture(),
@@ -60,14 +56,6 @@ public class UserTests {
         assertEquals(date,
                 user.getSignUpDate(),
                 "La date de création du compte est fausse.");
-    }
-
-    @Test
-    public void testAccessorDescription() {
-        user.setDescription("Tomorrowland 2022 hype");
-        assertEquals("Tomorrowland 2022 hype",
-                user.getDescription(),
-                "La description est fausse");
     }
 
     @Test
