@@ -88,7 +88,7 @@ public class AddPostController implements Initializable {
             statement = connection.prepareStatement(sqlRequest);
 //            statement.setString(1, "Image de test");
             statement.setInt(2, 9);
-            statement.setInt(3, 10);
+            statement.setInt(3, 10) ;
             statement.setDate(4, new Date(2021, 1, 20));
             statement.executeUpdate();
 
