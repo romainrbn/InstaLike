@@ -59,7 +59,7 @@ public class AddPostController implements Initializable {
         Connection connection = null;
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             String mysqlUrl = "jdbc:mysql://localhost/LDCSS_dev?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             connection = DriverManager.getConnection(mysqlUrl,"root","");
         } catch (Exception e) {
@@ -83,13 +83,13 @@ public class AddPostController implements Initializable {
 
             connection = getConnection();
 
-            String sqlRequest = "insert into posts(postID, userID, photoID, publishDate) " + "values(?,?,?,?)";
+            String sqlRequest = "insert into posts(userID, photoID, publishDate) " + "values(?,?,?)";
 
             statement = connection.prepareStatement(sqlRequest);
-//            statement.setString(1, "Image de test");
-            statement.setInt(2, 9);
-            statement.setInt(3, 10) ;
-            statement.setDate(4, new Date(2021, 1, 20));
+
+            statement.setInt(1, 9);
+            statement.setInt(2, 10) ;
+            statement.setTimestamp(3, java.sql.Timestamp.from(java.time.Instant.now()));
             statement.executeUpdate();
 
         } catch (FileNotFoundException e) {

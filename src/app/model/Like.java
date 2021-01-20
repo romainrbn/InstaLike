@@ -12,7 +12,7 @@ public class Like extends User {
     private User user;
 
     public Like(User user, int likeId, Date publishTime) {
-        super(user.getId(), user.getDescription(), user.getProfilePicture(), user.getUsername(), user.getFriendlyName(), user.getSignUpDate());
+        super(user.getId(), user.getProfilePicture(), user.getUsername(), user.getFriendlyName(), user.getSignUpDate());
         this.publishTime = publishTime;
         this.likeId = likeId;
     }
