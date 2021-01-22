@@ -9,17 +9,16 @@
     <VBox alignment="TOP_CENTER" spacing="30" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
         <children>
 
-            <ImageView fx:id="profileImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+            <ImageView fx:id="profileImageView" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handlePictureClicked" pickOnBounds="true">
                 <image>
                     <Image url="@../resources/icons/paysage.jpg" />
                 </image>
             </ImageView>
 
-            <TextField promptText="Entrez votre nom">
+            <TextField fx:id="nameTextField" promptText="Entrez votre nom" />
 
-            </TextField>
+            <Button fx:id="validateButton" onAction="#validateForm" text="Valider" />
 
         </children>
     </VBox>
-
 </AnchorPane>
