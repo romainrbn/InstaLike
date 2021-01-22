@@ -99,12 +99,12 @@ public class PostViewController implements Initializable {
         try {
             connection = Helpers.getConnection();
 
-            String request = "SELECT * FROM users WHERE userID = " + post.getUserId();
+            String request = "SELECT username FROM users WHERE userID = " + post.getUserId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
 
             while(rs.next()) {
-                username = rs.getString("friendlyName");
+                username = rs.getString(1);
                 return;
             }
 
