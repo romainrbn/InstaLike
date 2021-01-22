@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.views.EditAccountView;
 import app.views.LoginView;
 import app.views.MainView;
 import javafx.application.Application;
@@ -58,6 +59,11 @@ public class MainController implements Initializable {
     @FXML
     public void handleAccount() {
         System.out.println("Go account");
+        try {
+            Helpers.runAnotherApp(EditAccountView.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -67,7 +73,6 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleLogout(ActionEvent event) {
-        System.out.println("Sign out");
         Node source = (Node) event.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();
         sourceState.close();
@@ -78,6 +83,4 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 }
