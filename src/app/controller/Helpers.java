@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,12 +56,20 @@ public class Helpers {
         application.start(anotherStage);
     }
 
+    public static void maskRoundImage(ImageView imageView) {
+        Circle maskCircle = new Circle();
+        maskCircle.setCenterX(imageView.getFitWidth() / 2);
+        maskCircle.setCenterY((imageView.getFitHeight() / 2) - 4);
+        maskCircle.setRadius(imageView.getFitWidth() / 2);
+        imageView.setClip(maskCircle);
+    }
+
     public static Connection getConnection() {
         Connection connection = null;
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";
+            String mariaDbUrl = "jdbc:mariadb://localhost:8888/LDCSS_dev";
             connection = DriverManager.getConnection(mariaDbUrl,"root","");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);

@@ -149,11 +149,9 @@ public class LoginController implements Initializable {
             }
         }
 
-
         currentUser = User.generateExampleUser();
 
         System.out.println("Handle sign up succeed with " + userNameTextField.getText() + " and " + passwordTextField.getText());
-
 
         Node source = (Node) event.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();
@@ -165,10 +163,7 @@ public class LoginController implements Initializable {
             e.printStackTrace();
             showAlert("Erreur","Une erreur est survenue",e.getMessage());
         }
-
     }
-
-
 
     private Boolean handleCheckPasswordOnSignUp(String pw) {
         return !(pw.isEmpty() || pw.length() < 6 || !Helpers.checkStringForSignUp(pw));
@@ -177,6 +172,4 @@ public class LoginController implements Initializable {
     private Boolean handleCheckUsernameOnSignUp(String un) {
         return !(un.isEmpty() || un.length() >20 || un.length() < 3);
     }
-
-
 }

@@ -22,7 +22,7 @@ public class MainView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/MainView.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
