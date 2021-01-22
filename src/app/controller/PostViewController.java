@@ -104,7 +104,7 @@ public class PostViewController implements Initializable {
             ResultSet rs = statement.executeQuery(request);
 
             while(rs.next()) {
-                username = rs.getString("username");
+                username = rs.getString("friendlyName");
                 return;
             }
 
