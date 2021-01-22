@@ -85,7 +85,10 @@ public class PostViewController implements Initializable {
         try{
             connection = Helpers.getConnection();
             String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
-            statement = connection.createStatement();
+            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
+            if(resultSet.next()){
+                Blob picture
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
