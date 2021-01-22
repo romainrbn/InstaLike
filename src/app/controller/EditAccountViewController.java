@@ -81,8 +81,8 @@ public class EditAccountViewController implements Initializable {
             Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
             inputStream = new FileInputStream(file);
 
-            String sqlRequestDescription = "INSERT INTO users(friendlyName) WHERE userID = " + currentUser + " values(?)";
-            String uploadPhotoRequest = "INSERT INTO photos(publishDate, data) WHERE userID = " + currentUser + " values(?,?)";
+            String sqlRequestDescription = "UPDATE users SET friendlyName = (?) WHERE userID =" + currentUser;
+            String uploadPhotoRequest = "INSERT INTO photos(publishDate, data) values(?,?)";
 
             Statement st = connection.createStatement();
 
@@ -102,7 +102,7 @@ public class EditAccountViewController implements Initializable {
                 photoIndex = photoIndexResult.getInt(1);
 
                 // Mettre à jour l'indice de la photo pour l'utilisateur
-                String updateIndexRequest = "INSERT INTO users(photoID) WHERE userID = " + currentUser + " values(?)";
+                String updateIndexRequest = "UPDATE users SET photoID = (?) WHERE userID = " + currentUser;
                 photoIndexStatement = connection.prepareStatement(updateIndexRequest);
                 photoIndexStatement.setInt(1, photoIndex);
                 photoIndexStatement.executeUpdate();

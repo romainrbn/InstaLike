@@ -81,26 +81,26 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
-        Connection connection;
-
-        try{
-            connection = Helpers.getConnection();
-            String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
-            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
-            if(resultSet.next()){
-                InputStream picture = resultSet.getBinaryStream("data");
-//                InputStream inputStream = picture.getBinaryStream();
-                Image image = new Image(picture);
-                postImageView.setImage(image);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
-//      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
-//        Image postImage = new Image(url);
-//        postImageView.setImage(image);
+//        Connection connection;
+//
+//        try{
+//            connection = Helpers.getConnection();
+//            String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
+//            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
+//            if(resultSet.next()){
+//                InputStream picture = resultSet.getBinaryStream("data");
+////                InputStream inputStream = picture.getBinaryStream();
+//                Image image = new Image(picture);
+//                postImageView.setImage(image);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
+      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
+        Image postImage = new Image(url);
+        postImageView.setImage(postImage);
     }
 
     public void setProfileImageView() {
