@@ -1,5 +1,6 @@
 package app.controller;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,8 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import javax.xml.transform.Result;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -28,6 +34,11 @@ public class EditAccountViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Helpers.maskRoundImage(profileImageView);
+        try {
+            loadImageFromServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private File newImage;
@@ -58,13 +69,39 @@ public class EditAccountViewController implements Initializable {
         // Fermer la fenêtre
         String newName = nameTextField.getText();
 
-
         executeServerRequest(newName, newImage);
 
         // Fermer la fenêtre actuelle
         Node source = (Node) actionEvent.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();
         sourceState.close();
+    }
+
+    private void loadImageFromServer() throws Exception {
+        Connection connection;
+
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT photoID FROM users WHERE userID = " + currentUser;
+            Statement st = connection.createStatement();
+            ResultSet getPhotoIdRs = st.executeQuery(request);
+
+            if(getPhotoIdRs.next()) {
+                int photoIndex = getPhotoIdRs.getInt(1);
+
+                String getPhoto = "SELECT (photoID, data) FROM photos WHERE photoID = " + photoIndex;
+                ResultSet rs = st.executeQuery(getPhoto);
+                Blob blob = rs.getBlob("data");
+                InputStream is = blob.getBinaryStream();
+                BufferedImage bufferedImage = ImageIO.read(is);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                profileImageView.setImage(image);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void executeServerRequest(String friendlyName, File file) throws Exception {
