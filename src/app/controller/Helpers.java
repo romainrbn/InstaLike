@@ -59,7 +59,7 @@ public class Helpers {
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";//?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";
             connection = DriverManager.getConnection(mariaDbUrl,"root","");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);

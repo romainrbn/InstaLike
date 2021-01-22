@@ -59,7 +59,8 @@ public class PostViewController implements Initializable {
         maskRoundImage();
     }
 
-    public void initialize(Post post) {
+
+    public void initializePost(Post post) {
         this.post = post;
         setAuthorLabel();
         setLocationLabel();
@@ -97,6 +98,7 @@ public class PostViewController implements Initializable {
 
     private void setLikesCountLabel() {
         likesCountLabel.setText(post.getLikesList().size() + " J'aime");
+        System.out.println("POPOP "+post.toString());
     }
 
     private void setDescriptionLabel() {

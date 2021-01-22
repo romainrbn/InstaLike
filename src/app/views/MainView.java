@@ -57,15 +57,21 @@ public class MainView extends Application {
 
         VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
+        System.out.println("PRINT GETPOST" + getPosts().toString());
+
         // Display each post
         for (int i = 0; i < getPosts().size() ; i++) {
-            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("../fxml/PostView.fxml"));
 
-            PostViewController controller = postViewLoader.getController();
-            controller.initialize(getPosts().get(i));
+            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("../fxml/PostView.fxml"));
 
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));
+
+            PostViewController controller = (PostViewController) postViewLoader.getController();
+            controller.initializePost(getPosts().get(i));
+
+
+
 
             postsBox.getChildren().add(postViewRoot);
         }
@@ -79,12 +85,11 @@ public class MainView extends Application {
             connection = Helpers.getConnection();
 
             // Obtenir les 3 derniers éléments de la liste de posts.
-            String request = "SELECT TOP 3 * FROM posts ORDER BY postID DESC";
+            String request = "SELECT * FROM posts ORDER BY postID DESC LIMIT 3";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(request);
 
             while(resultSet.next()) {
-
                 int postId = resultSet.getInt("postId");
                 int userId = resultSet.getInt("userId");
                 int photoId = resultSet.getInt("photoId");
