@@ -55,7 +55,7 @@ public class PostViewController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        maskRoundImage();
+        Helpers.maskRoundImage(profileImageView);
     }
 
 
@@ -165,13 +165,7 @@ public class PostViewController implements Initializable {
         locationLabel.setText(post.getLocalisation());
     }
 
-    private void maskRoundImage() {
-        Circle maskCircle = new Circle();
-        maskCircle.setCenterX(profileImageView.getFitWidth() / 2);
-        maskCircle.setCenterY((profileImageView.getFitHeight() / 2) - 4);
-        maskCircle.setRadius(profileImageView.getFitWidth() / 2);
-        profileImageView.setClip(maskCircle);
-    }
+
 
     public void handleComments() throws Exception {
         Helpers.runAnotherApp(CommentsView.class);
