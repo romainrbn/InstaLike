@@ -3,6 +3,7 @@ package app.controller;
 import app.model.Post;
 import app.model.User;
 import app.views.CommentsView;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -18,8 +19,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -80,24 +82,25 @@ public class PostViewController implements Initializable {
 
     public void setPostImage() throws Exception {
         Connection connection;
-        Statement statement;
 
         try{
             connection = Helpers.getConnection();
             String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
             ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
             if(resultSet.next()){
-                Blob picture
+                InputStream picture = resultSet.getBinaryStream("data");
+//                InputStream inputStream = picture.getBinaryStream();
+                Image image = new Image(picture);
+                postImageView.setImage(image);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
-      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
-        Image postImage = new Image(url);
-        postImageView.setImage(postImage);
+//        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
+//      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
+//        Image postImage = new Image(url);
+//        postImageView.setImage(image);
     }
 
     public void setProfileImageView() {

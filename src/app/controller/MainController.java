@@ -68,7 +68,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleAddPicture() throws IOException {
-        Helpers.openPopUp("AddPost");
+        Helpers.openPopUp("AddPostView");
     }
 
     @FXML
