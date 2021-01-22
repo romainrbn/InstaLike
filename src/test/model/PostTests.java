@@ -18,7 +18,7 @@ public class PostTests {
     @BeforeEach
     public void setUp() {
         // Generate a mockup post for testing.
-        post = new Post(1, User.generateExampleUser(), "https://www.google.com", new Date(),
+        post = new Post(1, 1, 1, new Date(),
                 Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
                 Post.PostState.POSTED, true, "Ma super description");
     }

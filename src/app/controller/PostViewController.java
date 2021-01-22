@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 
 public class PostViewController implements Initializable {
@@ -38,14 +40,13 @@ public class PostViewController implements Initializable {
     @FXML Label descriptionLabel;
     @FXML Label likesCountLabel;
 
-
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        post = Post.generateExamplePost();// Chargement réseau
+    //    post = Post.generateExamplePost(); // Chargement réseau
 
         likeButton.setOnMouseEntered(e -> likeButton.setStyle(HOVER_BUTTON_STYLE));
         likeButton.setOnMouseExited(e -> likeButton.setStyle(IDLE_BUTTON_STYLE));
@@ -55,16 +56,16 @@ public class PostViewController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        maskRoundImage();
+    }
+
+    public void initialize(Post post) {
+        this.post = post;
         setAuthorLabel();
         setLocationLabel();
         setLikesCountLabel();
         setDescriptionLabel();
         setProfileImageView();
-        maskRoundImage();
-    }
-
-    public void initialize(Post post) {
-        setAuthor(post.getAuthor());
     }
 
     public void setAuthor(User author) {
@@ -84,13 +85,14 @@ public class PostViewController implements Initializable {
     }
 
     public void setProfileImageView() {
-        String url = post.getAuthor().getProfilePicture();
-        Image profileImage = new Image(url);
+     //   String url = post.getUserId().getProfilePicture();
+        Image profileImage = new Image("https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg");
         profileImageView.setImage(profileImage);
     }
 
     public void setAuthorLabel() {
-        usernameLabel.setText(post.getAuthor().getFriendlyName());
+     //   usernameLabel.setText(post.getAuthor().getFriendlyName());
+        usernameLabel.setText("" + post.getUserId());
     }
 
     private void setLikesCountLabel() {

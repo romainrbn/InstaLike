@@ -9,10 +9,10 @@ import java.util.List;
 public class Post {
 
     private int             postId;
-    private User            author;
-    private String          photoURL;
+    private int             userId;
+    private int             photoId;
     private Date            publishTime;
-    private List<Comment>   commentsList;
+    private List<Comment>   commentsList; // = new ArrayList<>();
     private List<Like>      likesList;
     private String          localisation;
     private PostState       state;
@@ -21,11 +21,11 @@ public class Post {
     private Boolean         displayed;
     private String          description;
 
-    public Post(int postId, User author, String photoURL, Date publishTime, List<Comment> commentsList, List<Like>
+    public Post(int postId, int userId, int photoId, Date publishTime, List<Comment> commentsList, List<Like>
             likesList, String localisation, PostState state, Boolean displayed, String description) {
         this.postId         = postId;
-        this.author         = author;
-        this.photoURL       = photoURL;
+        this.userId         = userId;
+        this.photoId        = photoId;
         this.publishTime    = publishTime;
         this.commentsList   = commentsList;
         this.likesList      = likesList;
@@ -36,22 +36,22 @@ public class Post {
     }
 
 
-
-    public User getAuthor() {
-        return author;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getPhotoURL() {
-        return photoURL;
+    public int getPhotoId() {
+        return photoId;
     }
 
-    public void setPhotoURL(String photoURL) {
-        this.photoURL = photoURL;
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
     }
+
 
     public Date getPublishTime() {
         return publishTime;
@@ -121,8 +121,8 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "postId=" + postId +
-                ", author=" + author.toString() +
-                ", photoURL='" + photoURL + '\'' +
+                ", author=" + userId +
+                ", photoURL='" + photoId + '\'' +
                 ", publishTime=" + publishTime +
                 ", commentsList=" + commentsList +
                 ", likesList=" + likesList +
@@ -133,12 +133,13 @@ public class Post {
                 '}';
     }
 
+
     public enum PostState {
         POSTED, DELETED
     }
 
     public static Post generateExamplePost() {
-        return new Post(1, User.generateExampleUser(), "https://www.google.com", new Date(),
+        return new Post(1, 0, 1, new Date(),
                 Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
                 Post.PostState.POSTED, true, "Ma super description");
     }

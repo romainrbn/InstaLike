@@ -9,7 +9,6 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;">
          <children>
-
             <VBox alignment="CENTER">
                <children>
                   <ImageView fx:id="profileImageView" fitHeight="42.0" fitWidth="34.0" pickOnBounds="true">

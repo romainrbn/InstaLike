@@ -1,5 +1,8 @@
 package app.views;
 
+import app.controller.Helpers;
+import app.controller.PostViewController;
+import app.model.Post;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainView extends Application {
 
@@ -31,7 +37,6 @@ public class MainView extends Application {
     }
 
     private void setupUI(FXMLLoader loader) throws Exception {
-        AnchorPane rightPane = (AnchorPane) loader.getNamespace().get("rightPane");
         AnchorPane leftPane = (AnchorPane) loader.getNamespace().get("leftPane");
 
         SplitPane splitPane = (SplitPane) loader.getNamespace().get("splitPane");
@@ -52,24 +57,63 @@ public class MainView extends Application {
 
         VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
-        for (int i = 0; i < 5 ; i++) {
+        // Display each post
+        for (int i = 0; i < getPosts().size() ; i++) {
             FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("../fxml/PostView.fxml"));
+
+            PostViewController controller = postViewLoader.getController();
+            controller.initialize(getPosts().get(i));
 
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));
+
             postsBox.getChildren().add(postViewRoot);
         }
+    }
 
+    private List<Post> getPosts() {
+        Connection connection;
+        List<Post> posts = new ArrayList<>();
+
+        try {
+            connection = Helpers.getConnection();
+
+            // Obtenir les 3 derniers éléments de la liste de posts.
+            String request = "SELECT TOP 3 * FROM posts ORDER BY postID DESC";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(request);
+
+            while(resultSet.next()) {
+
+                int postId = resultSet.getInt("postId");
+                int userId = resultSet.getInt("userId");
+                int photoId = resultSet.getInt("photoId");
+                String localisation = resultSet.getString("localisation");
+                Timestamp publishDate = resultSet.getTimestamp("publishDate");
+
+                Post post = new Post(
+                        postId,
+                        userId,
+                        photoId,
+                        publishDate,
+                        new ArrayList<>(),
+                        new ArrayList<>(),
+                        localisation,
+                        Post.PostState.POSTED,
+                        false,
+                        "description ici"
+                );
+                posts.add(post);
+            }
+
+        } catch (SQLException e) {
+            Helpers.showAlert("Erreur", "Une erreur est survenue", e.getMessage());
+        }
+
+        return posts;
     }
 
     public static void main(String[] args) {
-//        try {
-//            URL iconURL = LoginView.class.getResource("LogoInstaLike.png");
-//            java.awt.Image image = new ImageIcon(iconURL).getImage();
-//            com.apple.eawt.Application.getApplication().setDockIconImage(image);
-//        } catch (Exception e) {
-//            // Ne marche pas sur Windows et Linux
-//        }
         launch(args);
     }
 }

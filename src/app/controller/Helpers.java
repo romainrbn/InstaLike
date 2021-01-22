@@ -4,9 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class Helpers {
 
@@ -49,5 +52,27 @@ public class Helpers {
         Application application = anotherAppClass.newInstance();
         Stage anotherStage = new Stage();
         application.start(anotherStage);
+    }
+
+    public static Connection getConnection() {
+        Connection connection = null;
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";//?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            connection = DriverManager.getConnection(mariaDbUrl,"root","");
+        } catch (Exception e) {
+            System.out.println("Error occured while getting the connection: - " + e);
+        }
+        return connection;
+    }
+
+
+    public static void showAlert(String title, String headerText, String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

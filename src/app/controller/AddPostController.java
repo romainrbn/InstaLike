@@ -1,7 +1,5 @@
 package app.controller;
 
-import app.model.Post;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,14 +9,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
-import java.sql.Date;
 import java.util.*;
 
 public class AddPostController implements Initializable {
@@ -40,7 +35,7 @@ public class AddPostController implements Initializable {
     }
 
     @FXML
-    public void handleFileChooser(ActionEvent event){
+    public void handleFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une photo à publier");
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg");
@@ -52,35 +47,22 @@ public class AddPostController implements Initializable {
         }
     }
 
-    public Connection getConnection() {
-        Connection connection = null;
-        System.out.println("USER_ID : "+LoginController.USER_ID);
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";//?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-            connection = DriverManager.getConnection(mariaDbUrl,"root","");
-        } catch (Exception e) {
-            System.out.println("Error occured while getting the connection: - " + e);
-        }
-        return connection;
-    }
-
     @FXML
-    public void handlePostSend (ActionEvent event) throws Exception {
+    public void handlePostSend (ActionEvent event) {
         String localisation = localisationTextField.getText();
         String description = descriptionTextArea.getText();
 
         Connection connection = null;
         PreparedStatement statement = null;
-        PreparedStatement photoStatement = null;
-        FileInputStream inputStream = null;
-        int photoIndex = 0;
+        PreparedStatement photoStatement;
+        FileInputStream inputStream;
+        int photoIndex;
 
         try {
             File image = new File(fileURL);
             inputStream = new FileInputStream(image);
 
-            connection = getConnection();
+            connection = Helpers.getConnection();
 
             String sqlRequest = "insert into posts(userID, photoID, localisation, publishDate) " + "values(?,?,?,?);";
             String uploadPhotoRequest = "insert into photos(publishDate, data) " + "values(?,?)";
@@ -129,7 +111,9 @@ public class AddPostController implements Initializable {
             System.out.println("SQLException: - " + e);
         } finally {
             try {
+                assert  connection != null;
                 connection.close();
+                assert statement != null;
                 statement.close();
             } catch (SQLException e) {
                 System.out.println("SQLException Finally: - " + e);

@@ -51,17 +51,17 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void handleSetHome(ActionEvent event) {
+    public void handleSetHome() {
         System.out.println("Go home");
     }
 
     @FXML
-    public void handleAccount(ActionEvent event) {
+    public void handleAccount() {
         System.out.println("Go account");
     }
 
     @FXML
-    public void handleAddPicture(ActionEvent event) throws IOException {
+    public void handleAddPicture() throws IOException {
         Helpers.openPopUp("AddPost");
     }
 
