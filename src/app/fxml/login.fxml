@@ -114,7 +114,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0">
                <image>
-                  <Image url="@../views/LogoInstaLike.png" />
+                  <Image url="@../resources/icons/LogoInstaLike.png" />
                </image></ImageView>
          </children>
       </HBox>

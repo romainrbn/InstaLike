@@ -25,7 +25,7 @@ public class MainView extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
         Scene scene = new Scene(root, 1150, 800);
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(1150);

@@ -59,13 +59,14 @@ public class PostViewController implements Initializable {
     }
 
 
-    public void initializePost(Post post) {
+    public void initializePost(Post post) throws SQLException {
         this.post = post;
         setAuthorLabel();
         setLocationLabel();
         setLikesCountLabel();
         setDescriptionLabel();
         setProfileImageView();
+        setLikeIndicator();
     }
 
     public void setAuthor(User author) {
@@ -78,6 +79,18 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
+        Connection connection;
+        Statement statement;
+
+        try{
+            connection = Helpers.getConnection();
+            String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
+            statement = connection.createStatement();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
       //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
         Image postImage = new Image(url);
@@ -160,23 +173,41 @@ public class PostViewController implements Initializable {
     public void handleComments() throws Exception {
         Helpers.runAnotherApp(CommentsView.class);
     }
-    public void handleLike() {
-        if(likeButton.isSelected()){
-            Connection connection;
-            PreparedStatement statement;
+    public void handleLike() throws SQLException {
+        Connection connection;
+        connection = Helpers.getConnection();
+        if(likeButton.isSelected() && !alreadyLike()){
+            PreparedStatement statementForLike;
+            likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])+1 +" J'aime");
 
             try {
-                connection = Helpers.getConnection();
-                String request = "INSERT INTO likes(postID, userID, publishDate)"+" values(?,?,?);";
-                statement = connection.prepareStatement(request);
-                statement.setInt(1,post.getPostId());
-                statement.setInt(2,LoginController.USER_ID);
-                statement.setTimestamp(3,java.sql.Timestamp.from(java.time.Instant.now()));
-                statement.executeUpdate();
+                String requestForLike = "INSERT INTO likes(postID, userID, publishDate)"+" values(?,?,?);";
+                statementForLike = connection.prepareStatement(requestForLike);
+                statementForLike.setInt(1,post.getPostId());
+                statementForLike.setInt(2,LoginController.USER_ID);
+                statementForLike.setTimestamp(3,java.sql.Timestamp.from(java.time.Instant.now()));
+                statementForLike.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }else if(alreadyLike()){
+            likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])-1 +" J'aime");
+            String requestForDislike = "DELETE FROM likes WHERE userID = "+LoginController.USER_ID + " AND postID = " + post.getPostId();
+            connection.createStatement().executeQuery(requestForDislike);
         }
-
+    }
+    public boolean alreadyLike() throws SQLException {
+        Connection connection;
+        connection = Helpers.getConnection();
+        String alreadyLike = "SELECT * FROM likes WHERE userID = "+LoginController.USER_ID + " AND postID = " + post.getPostId();
+        ResultSet rs = connection.createStatement().executeQuery(alreadyLike);
+        while(rs.next()){
+            return true;
+        }
+        return false;
+    }
+    // Initialise l'indicateur de like a l'ouverture de la fenêtre pour chaque post
+    private void setLikeIndicator() throws SQLException {
+        likeButton.setSelected(alreadyLike());
     }
 }
