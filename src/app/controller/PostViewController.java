@@ -91,37 +91,58 @@ public class PostViewController implements Initializable {
     }
 
     public void setAuthorLabel() {
-     //   usernameLabel.setText(post.getAuthor().getFriendlyName());
-
         Connection connection;
         String username = "";
-
         try {
             connection = Helpers.getConnection();
-
-            String request = "SELECT * FROM users WHERE userID = " + post.getUserId();
+            String request = "SELECT username FROM users WHERE userID = " + post.getUserId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
-
             while(rs.next()) {
-                username = rs.getString("friendlyName");
-                return;
+                username = rs.getString(1);
+                break;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         usernameLabel.setText(username);
     }
 
     private void setLikesCountLabel() {
-        likesCountLabel.setText(post.getLikesList().size() + " J'aime");
-        System.out.println("POPOP "+post.toString());
+        Connection connection;
+        int likecompter = 0;
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT COUNT(*) FROM likes WHERE postID = " + post.getPostId();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(request);
+            while(rs.next()) {
+                likecompter = rs.getInt(1);
+                break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        likesCountLabel.setText(likecompter + " J'aime");
     }
 
     private void setDescriptionLabel() {
-        descriptionLabel.setText(post.getDescription());
+        Connection connection;
+        String description = "";
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT content FROM descriptions WHERE postID = " + post.getPostId();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(request);
+            while(rs.next()) {
+                description = rs.getString(1);
+                break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        descriptionLabel.setText(description);
     }
 
     public void setLocationLabel() {
@@ -138,5 +159,24 @@ public class PostViewController implements Initializable {
 
     public void handleComments() throws Exception {
         Helpers.runAnotherApp(CommentsView.class);
+    }
+    public void handleLike() {
+        if(likeButton.isSelected()){
+            Connection connection;
+            PreparedStatement statement;
+
+            try {
+                connection = Helpers.getConnection();
+                String request = "INSERT INTO likes(postID, userID, publishDate)"+" values(?,?,?);";
+                statement = connection.prepareStatement(request);
+                statement.setInt(1,post.getPostId());
+                statement.setInt(2,LoginController.USER_ID);
+                statement.setTimestamp(3,java.sql.Timestamp.from(java.time.Instant.now()));
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
