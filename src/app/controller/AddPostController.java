@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.model.Post;
-import com.mysql.jdbc.Driver;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,7 +47,7 @@ public class AddPostController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            System.out.println(file.getPath());
+            System.out.println("Picture path : "+file.getPath());
             fileURL = file.getPath();
         }
     }
@@ -82,8 +82,9 @@ public class AddPostController implements Initializable {
 
             connection = getConnection();
 
-            String sqlRequest = "insert into posts(userID, photoID, publishDate) " + "values(?,?,?);";
+            String sqlRequest = "insert into posts(userID, photoID, localisation, publishDate) " + "values(?,?,?,?);";
             String uploadPhotoRequest = "insert into photos(publishDate, data) " + "values(?,?)";
+            String uploadDescriptionrequest = "insert into descriptions(postID, publishDate, content)" + "values(?,?,?);";
             Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
             Statement st = connection.createStatement();
 
@@ -95,15 +96,31 @@ public class AddPostController implements Initializable {
             String getPhotoIndexRequest = "SELECT LAST_INSERT_ID()";
             ResultSet photoIndexResult = st.executeQuery(getPhotoIndexRequest);
 
-            if(photoIndexResult.next()) {
+            if (photoIndexResult.next()) {
                 photoIndex = photoIndexResult.getInt(1);
 
                 // Upload post if photo is uploaded
                 statement = connection.prepareStatement(sqlRequest);
                 statement.setInt(1, LoginController.USER_ID);
                 statement.setInt(2, photoIndex);
-                statement.setTimestamp(3, currentTime);
+                statement.setString(3,localisation);
+                statement.setTimestamp(4, currentTime);
                 statement.executeUpdate();
+                String getPostIndexRequest = "SELECT LAST_INSERT_ID()";
+                ResultSet postIndexResult = st.executeQuery(getPostIndexRequest);
+
+                if (postIndexResult.next()){
+                    statement = connection.prepareStatement(uploadDescriptionrequest);
+                    statement.setInt(1,postIndexResult.getInt(1));
+                    statement.setTimestamp(2,currentTime);
+                    statement.setString(3,description);
+                    statement.executeUpdate();
+
+                    // Ferme la fenêtre
+                    Node source = (Node) event.getSource();
+                    Stage sourceState = (Stage) source.getScene().getWindow();
+                    sourceState.close();
+                }
             }
 
         } catch (FileNotFoundException e) {
@@ -118,15 +135,5 @@ public class AddPostController implements Initializable {
                 System.out.println("SQLException Finally: - " + e);
             }
         }
-
-        /*if(localisation == null || LoginController.currentUser == null || fileURL == null)
-            return;
-
-        Post post = new Post(0, LoginController.currentUser, fileURL, new Date(), new ArrayList<>(), new ArrayList<>(), localisation, Post.PostState.POSTED, true, description);
-        System.out.println(post.toString());
-
-        Node source = (Node) event.getSource();
-        Stage sourceState = (Stage) source.getScene().getWindow();
-        sourceState.close();*/
-    } // ldcss1rabo pw : romain
+    }
 }

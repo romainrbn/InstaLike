@@ -52,12 +52,12 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleSetHome(ActionEvent event) {
-        System.out.println("go home");
+        System.out.println("Go home");
     }
 
     @FXML
     public void handleAccount(ActionEvent event) {
-        System.out.println("go account");
+        System.out.println("Go account");
     }
 
     @FXML
@@ -67,7 +67,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void handleLogout(ActionEvent event) {
-        System.out.println("sign out");
+        System.out.println("Sign out");
         Node source = (Node) event.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();
         sourceState.close();

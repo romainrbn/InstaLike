@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
             ResultSet rs = st.executeQuery(sqlRequest);
 
             while(rs.next()){
-                System.out.println("Utilasateur connecter");
+                System.out.println("Utilisateur connecter");
 
                 USER_ID = rs.getInt(1);
 
