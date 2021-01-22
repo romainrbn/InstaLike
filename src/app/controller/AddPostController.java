@@ -72,7 +72,9 @@ public class AddPostController implements Initializable {
 
         Connection connection = null;
         PreparedStatement statement = null;
+        PreparedStatement photoStatement = null;
         FileInputStream inputStream = null;
+        int photoIndex = 0;
 
         try {
             File image = new File(fileURL);
@@ -81,20 +83,27 @@ public class AddPostController implements Initializable {
             connection = getConnection();
 
             String sqlRequest = "insert into posts(userID, photoID, publishDate) " + "values(?,?,?);";
-
-            statement = connection.prepareStatement(sqlRequest);
-
-            statement.setInt(1, LoginController.USER_ID);
-            statement.setInt(2, 10) ;
-            statement.setTimestamp(3, java.sql.Timestamp.from(java.time.Instant.now()));
-            statement.executeUpdate();
-
-            sqlRequest = "SELECT LAST_INSERT_ID();";
+            String uploadPhotoRequest = "insert into photos(publishDate, data) " + "values(?,?)";
+            Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(sqlRequest);
 
-            if (rs.next()) {
-                System.out.println("ID_POST : " + rs.getInt(1));
+            // Upload photo
+            photoStatement = connection.prepareStatement(uploadPhotoRequest);
+            photoStatement.setTimestamp(1, currentTime);
+            photoStatement.setBinaryStream(2, inputStream); // Uploads blob
+            photoStatement.executeUpdate();
+            String getPhotoIndexRequest = "SELECT LAST_INSERT_ID()";
+            ResultSet photoIndexResult = st.executeQuery(getPhotoIndexRequest);
+
+            if(photoIndexResult.next()) {
+                photoIndex = photoIndexResult.getInt(1);
+
+                // Upload post if photo is uploaded
+                statement = connection.prepareStatement(sqlRequest);
+                statement.setInt(1, LoginController.USER_ID);
+                statement.setInt(2, photoIndex);
+                statement.setTimestamp(3, currentTime);
+                statement.executeUpdate();
             }
 
         } catch (FileNotFoundException e) {
