@@ -21,8 +21,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class PostViewController implements Initializable {
@@ -93,7 +92,27 @@ public class PostViewController implements Initializable {
 
     public void setAuthorLabel() {
      //   usernameLabel.setText(post.getAuthor().getFriendlyName());
-        usernameLabel.setText("" + post.getUserId());
+
+        Connection connection;
+        String username = "";
+
+        try {
+            connection = Helpers.getConnection();
+
+            String request = "SELECT * FROM users WHERE userID = " + post.getUserId();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(request);
+
+            while(rs.next()) {
+                username = rs.getString("username");
+                return;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        usernameLabel.setText(username);
     }
 
     private void setLikesCountLabel() {
@@ -121,4 +140,3 @@ public class PostViewController implements Initializable {
         Helpers.runAnotherApp(CommentsView.class);
     }
 }
-
