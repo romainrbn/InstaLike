@@ -89,13 +89,16 @@ public class EditAccountViewController implements Initializable {
             if(getPhotoIdRs.next()) {
                 int photoIndex = getPhotoIdRs.getInt(1);
 
-                String getPhoto = "SELECT (photoID, data) FROM photos WHERE photoID = " + photoIndex;
+                String getPhoto = "SELECT * FROM photos WHERE photoID = " + photoIndex;
                 ResultSet rs = st.executeQuery(getPhoto);
-                Blob blob = rs.getBlob("data");
-                InputStream is = blob.getBinaryStream();
-                BufferedImage bufferedImage = ImageIO.read(is);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                profileImageView.setImage(image);
+                if(rs.next()){
+                    Blob blob = rs.getBlob("data");
+                    InputStream is = blob.getBinaryStream();
+                    BufferedImage bufferedImage = ImageIO.read(is);
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    profileImageView.setImage(image);
+                }
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

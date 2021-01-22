@@ -52,16 +52,11 @@ public class PostViewController implements Initializable {
         likeButton.setOnMouseEntered(e -> likeButton.setStyle(HOVER_BUTTON_STYLE));
         likeButton.setOnMouseExited(e -> likeButton.setStyle(IDLE_BUTTON_STYLE));
 
-        try {
-            setPostImage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         Helpers.maskRoundImage(profileImageView);
     }
 
 
-    public void initializePost(Post post) throws SQLException {
+    public void initializePost(Post post) throws Exception {
         this.post = post;
         setAuthorLabel();
         setLocationLabel();
@@ -69,6 +64,7 @@ public class PostViewController implements Initializable {
         setDescriptionLabel();
         setProfileImageView();
         setLikeIndicator();
+        setPostImage();
     }
 
     public void setAuthor(User author) {
@@ -81,26 +77,28 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
-//        Connection connection;
-//
-//        try{
-//            connection = Helpers.getConnection();
-//            String requestPicture = "SELECT * FROM photos WHERE postID = " + post.getPostId();
-//            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
-//            if(resultSet.next()){
-//                InputStream picture = resultSet.getBinaryStream("data");
-////                InputStream inputStream = picture.getBinaryStream();
-//                Image image = new Image(picture);
-//                postImageView.setImage(image);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
-      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
-        Image postImage = new Image(url);
-        postImageView.setImage(postImage);
+        Connection connection;
+        assert post != null;
+        try{
+            connection = Helpers.getConnection();
+            String requestPicture = "SELECT * FROM photos WHERE photoID = " + post.getPhotoId();
+//            System.out.println(post.getPhotoId());
+            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
+            if(resultSet.next()){
+                Blob blob = resultSet.getBlob("data");
+                InputStream is = blob.getBinaryStream();
+                BufferedImage bufferedImage = ImageIO.read(is);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                postImageView.setImage(image);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
+//      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
+//        Image postImage = new Image(url);
+//        postImageView.setImage(postImage);
     }
 
     public void setProfileImageView() {
