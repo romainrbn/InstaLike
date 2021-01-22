@@ -16,7 +16,7 @@
                     <children>
                       <ImageView accessibleText="InstaLike Logo" fitHeight="75.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="logoImageView">
                         <image>
-                          <Image url="@../views/LogoInstaLike.png" />
+                          <Image url="@../resources/icons/LogoInstaLike.png" />
                         </image>
                       </ImageView>
                     </children>

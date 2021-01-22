@@ -14,7 +14,7 @@ public class LoginView extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/LoginView.fxml"));
         primaryStage.setTitle("Connexion et Inscription");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
         primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(800);
@@ -26,13 +26,6 @@ public class LoginView extends Application {
     }
 
     public static void main(String[] args) {
-//        try {
-//            URL iconURL = LoginView.class.getResource("LogoInstaLike.png");
-//            java.awt.Image image = new ImageIcon(iconURL).getImage();
-//            com.apple.eawt.Application.getApplication().setDockIconImage(image);
-//        } catch (Exception e) {
-//            // Ne marche pas sur Windows et Linux
-//        }
         launch(args);
     }
 }
