@@ -2,6 +2,7 @@ package app.controller;
 
 import app.model.Post;
 import app.model.User;
+import app.views.CommentsView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -76,7 +77,7 @@ public class PostViewController implements Initializable {
     }
 
     public void setPostImage() throws Exception {
-        String url =  "https://cdn.maikoapp.com/3d4b/4qgko/p200.jpg";
+        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
       //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
         Image postImage = new Image(url);
         postImageView.setImage(postImage);
@@ -112,8 +113,8 @@ public class PostViewController implements Initializable {
         profileImageView.setClip(maskCircle);
     }
 
-    public void handleComments() throws IOException {
-        Helpers.openPopUp("AddPost");
+    public void handleComments() throws Exception {
+        Helpers.runAnotherApp(CommentsView.class);
     }
 }
 

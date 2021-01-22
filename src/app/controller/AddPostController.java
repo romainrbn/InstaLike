@@ -17,11 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.*;
 
 public class AddPostController implements Initializable {
@@ -57,11 +54,11 @@ public class AddPostController implements Initializable {
 
     public Connection getConnection() {
         Connection connection = null;
-
+        System.out.println("USER_ID : "+LoginController.USER_ID);
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String mysqlUrl = "jdbc:mysql://localhost/LDCSS_dev?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-            connection = DriverManager.getConnection(mysqlUrl,"root","");
+            Class.forName("org.mariadb.jdbc.Driver");
+            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";//?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            connection = DriverManager.getConnection(mariaDbUrl,"root","");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);
         }
@@ -83,14 +80,22 @@ public class AddPostController implements Initializable {
 
             connection = getConnection();
 
-            String sqlRequest = "insert into posts(userID, photoID, publishDate) " + "values(?,?,?)";
+            String sqlRequest = "insert into posts(userID, photoID, publishDate) " + "values(?,?,?);";
 
             statement = connection.prepareStatement(sqlRequest);
 
-            statement.setInt(1, 9);
+            statement.setInt(1, LoginController.USER_ID);
             statement.setInt(2, 10) ;
             statement.setTimestamp(3, java.sql.Timestamp.from(java.time.Instant.now()));
             statement.executeUpdate();
+
+            sqlRequest = "SELECT LAST_INSERT_ID();";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sqlRequest);
+
+            if (rs.next()) {
+                System.out.println("ID_POST : " + rs.getInt(1));
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException: - " + e);

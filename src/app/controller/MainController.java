@@ -30,6 +30,7 @@ public class MainController implements Initializable {
     @FXML private Button homeButton;
     @FXML private Button signOutButton;
     @FXML private Button addButton;
+    @FXML private Button accountButton;
     private static final String HOVER_BUTTON_STYLE = "fx-background-color: #ff84a7; color: white;";
     private static final String IDLE_BUTTON_STYLE = "fx-background-color: white;";
 
@@ -38,6 +39,9 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         homeButton.setOnMouseEntered(e -> homeButton.setStyle(HOVER_BUTTON_STYLE));
         homeButton.setOnMouseExited(e -> homeButton.setStyle(IDLE_BUTTON_STYLE));
+
+        accountButton.setOnMouseEntered(e -> accountButton.setStyle(HOVER_BUTTON_STYLE));
+        accountButton.setOnMouseExited(e -> accountButton.setStyle(IDLE_BUTTON_STYLE));
 
         signOutButton.setOnMouseEntered(e -> signOutButton.setStyle(HOVER_BUTTON_STYLE));
         signOutButton.setOnMouseExited(e -> signOutButton.setStyle(IDLE_BUTTON_STYLE));
@@ -69,15 +73,11 @@ public class MainController implements Initializable {
         sourceState.close();
 
         try {
-            runAnotherApp(LoginView.class);
+            Helpers.runAnotherApp(LoginView.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void runAnotherApp(Class<? extends Application> anotherAppClass) throws Exception{
-        Application application = anotherAppClass.newInstance();
-        Stage anotherStage = new Stage();
-        application.start(anotherStage);
-    }
+
 }

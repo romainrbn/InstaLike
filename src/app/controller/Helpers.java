@@ -1,5 +1,6 @@
 package app.controller;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -42,5 +43,11 @@ public class Helpers {
         Scene scene = new Scene(root, 850, 650);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void runAnotherApp(Class<? extends Application> anotherAppClass) throws Exception{
+        Application application = anotherAppClass.newInstance();
+        Stage anotherStage = new Stage();
+        application.start(anotherStage);
     }
 }

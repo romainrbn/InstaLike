@@ -63,18 +63,9 @@ public class User {
 
     public static User generateExampleUser() {
         int id = 10;
-        String description      = "Super description";
-        String profilePicture   = "https://cdn.maikoapp.com/3d4b/4quqa/150.jpg";
+        String profilePicture   = "https://image.freepik.com/free-photo/galaxy-system-millions-billions-stars-together-with-gas-dust_39386-369.jpg";
         String username         = "@romainrbn";
         String friendlyName     = "Romain";
-        List<Integer> followers = new ArrayList<>();
-        followers.add(10);
-        followers.add(193);
-        followers.add(42);
-        List<Integer> following = new ArrayList<>();
-        following.add(293);
-        following.add(183);
-        following.add(284);
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         try {
