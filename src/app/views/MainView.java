@@ -4,7 +4,6 @@ import app.controller.Helpers;
 import app.controller.PostViewController;
 import app.model.Post;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,8 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +39,7 @@ public class MainView extends Application {
 
     }
 
-    private void setupUI(FXMLLoader loader) throws Exception {
+    private void setupUI(FXMLLoader loader) {
         AnchorPane leftPane = (AnchorPane) loader.getNamespace().get("leftPane");
 
         SplitPane splitPane = (SplitPane) loader.getNamespace().get("splitPane");
@@ -77,7 +74,7 @@ public class MainView extends Application {
             connection = Helpers.getConnection();
 
             // Obtenir les 3 derniers éléments de la liste de posts.
-            String request = "SELECT * FROM posts ORDER BY postID DESC"; //LIMIT 3
+            String request = "SELECT * FROM posts ORDER BY postID DESC";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(request);
 
@@ -130,7 +127,7 @@ public class MainView extends Application {
             Parent postViewRoot = postViewLoader.load();
             postViewRoot.setId(Integer.toString(i));
 
-            PostViewController controller = (PostViewController) postViewLoader.getController();
+            PostViewController controller = postViewLoader.getController();
             controller.initializePost(getPosts().get(i));
 
             postsBox.getChildren().add(postViewRoot);

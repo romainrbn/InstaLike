@@ -6,9 +6,7 @@ import app.controller.PostViewController;
 import app.model.Comment;
 import app.model.Post;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.LoadException;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -54,7 +52,7 @@ public class CommentsView extends Application {
             Parent commentViewRoot = commentViewLoader.load();
             commentViewRoot.setId(Integer.toString(i));
             Post getPost = PostViewController.passPost;
-            CommentViewController controller = (CommentViewController)  commentViewLoader.getController();
+            CommentViewController controller = commentViewLoader.getController();
             controller.initializeComment(getComments().get(i), getPost);
 
             commentsList.getChildren().add(commentViewRoot);

@@ -33,11 +33,4 @@ public class Like extends User {
         this.likeId = likeId;
     }
 
-    public static List<Like> generateRandomLikes() {
-        List<Like> likes = new ArrayList<>();
-        for(int i=0;i<25;i++) {
-            likes.add(new Like(User.generateExampleUser(), i, new Date()));
-        }
-        return likes;
-    }
 }

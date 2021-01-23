@@ -5,9 +5,6 @@ import app.model.Post;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-
-import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,8 +17,6 @@ public class CommentViewController implements Initializable {
     private Comment comment;
     private Post post;
 
-    @FXML
-    ImageView profileImageView;
 
     @FXML
     Label userNameLabel;
@@ -33,23 +28,23 @@ public class CommentViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void initializeComment(Comment comment, Post post) throws Exception {
+    public void initializeComment(Comment comment, Post post) {
         this.comment = comment;
         this.post = post;
         setCommentContent();
     }
 
-    private void setCommentContent() throws SQLException {
+    private void setCommentContent()  {
         // Load image from backend
-        int userId = 0;
+
         Connection connection;
         try {
             connection = Helpers.getConnection();
             String request = "SELECT * FROM comments WHERE postID = " + post.getPostId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
-            while (rs.next()) {
-                userId = rs.getInt("userID");
+            if (rs.next()) {
+
                 commentLabel.setText(this.comment.getCommentValue());
 
                 String userIDRequest = "SELECT * FROM users where userID = " + this.comment.getUserID();
@@ -60,7 +55,6 @@ public class CommentViewController implements Initializable {
                     userNameLabel.setText(username);
                     userNameLabel.setEllipsisString(username);
                 }
-                break;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

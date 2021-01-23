@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.controller.CommentViewController"
             prefHeight="400.0" prefWidth="800.0">
 
-    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0" spacing="20" style="-fx-padding: 0 0 0 30;" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
-        <children>
-
-            <VBox alignment="CENTER_LEFT">
-                <children>
-                    <Label fx:id="userNameLabel" text="username"
-                    ellipsisString="username">
-                        <font>
-                            <Font name="Arial Bold" size="18.0" />
-                        </font></Label>
-                </children>
-            </VBox>
-
-
-            <Label fx:id="commentLabel"
-            wrapText="true">
-                Contenu du commentaire
+    <HBox alignment="CENTER_LEFT"
+          prefHeight="100.0" prefWidth="800.0"
+          spacing="20"
+          style="-fx-padding: 0 0 0 30;"
+          AnchorPane.rightAnchor="0"
+          AnchorPane.leftAnchor="0">
+        <VBox alignment="CENTER_LEFT">
+            <Label fx:id="userNameLabel" text="username"
+                   ellipsisString="username">
+                <font>
+                    <Font name="Arial Bold"
+                          size="18.0"
+                    />
+                </font>
             </Label>
-        </children>
+        </VBox>
+
+
+        <Label fx:id="commentLabel"
+               wrapText="true">
+            Contenu du commentaire
+        </Label>
     </HBox>
 
 </AnchorPane>

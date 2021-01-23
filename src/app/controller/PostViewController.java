@@ -1,38 +1,30 @@
 package app.controller;
-
 import app.model.Post;
-import app.model.User;
+import app.views.CheckProfilView;
 import app.views.CommentsView;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class PostViewController implements Initializable {
 
     private Post post;
 
-    @FXML
-    public ImageView postImageView;
-
+    @FXML public ImageView postImageView;
     @FXML Label usernameLabel;
     @FXML Label locationLabel;
     @FXML ImageView profileImageView;
@@ -40,6 +32,8 @@ public class PostViewController implements Initializable {
     @FXML Button commentButton;
     @FXML Label descriptionLabel;
     @FXML Label likesCountLabel;
+    @FXML Label commentsCountLabel;
+    @FXML Label timestampLabel;
 
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
@@ -52,7 +46,6 @@ public class PostViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    //    post = Post.generateExamplePost(); // Chargement réseau
 
         likeButton.setOnMouseEntered(e -> likeButton.setStyle(HOVER_BUTTON_STYLE));
         likeButton.setOnMouseExited(e -> likeButton.setStyle(IDLE_BUTTON_STYLE));
@@ -70,15 +63,16 @@ public class PostViewController implements Initializable {
         setLikeIndicator();
         setPostImage();
         setProfileImageView();
+        setCommentsCountLabel();
+        setTimestampLabel();
     }
 
-    public void setAuthor(User author) {
-        usernameLabel.setText(author.getUsername());
-    }
+
 
     @FXML
-    public void handleUsernameClick(MouseEvent mouseEvent) {
-        System.out.println("Show user profile");
+    public void handleUsernameClick() throws Exception {
+        passPost = post;
+        Helpers.runAnotherApp(CheckProfilView.class);
     }
 
     public void setPostImage() {
@@ -130,10 +124,9 @@ public class PostViewController implements Initializable {
             String request = "SELECT photoID, friendlyName FROM users WHERE userID = " + post.getUserId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
-            while(rs.next()) {
+            if(rs.next()) {
                 username = rs.getString(2);
                 profilPhotoID = rs.getInt(1);
-                break;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,23 +134,63 @@ public class PostViewController implements Initializable {
         usernameLabel.setText(username);
     }
 
-    private void setLikesCountLabel() {
+    public void setTimestampLabel() {
         Connection connection;
-        int likecompter = 0;
+
         try {
             connection = Helpers.getConnection();
-            String request = "SELECT COUNT(*) FROM likes WHERE postID = " + post.getPostId();
+            String request = "SELECT publishDate FROM posts WHERE postID = " + post.getPostId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
-            while(rs.next()) {
-                likecompter = rs.getInt(1);
-                break;
+            if(rs.next()) {
+                Timestamp ts = rs.getTimestamp(1);
+                Date date = new Date(ts.getTime());
+
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                String dateForLabel = format.format(date);
+                timestampLabel.setText(dateForLabel);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        likesCountLabel.setText(likecompter + " J'aime");
+    }
+
+    private void setLikesCountLabel() {
+        Connection connection;
+        int likeCounter = 0;
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT COUNT(*) FROM likes WHERE postID = " + post.getPostId();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(request);
+            if(rs.next()) {
+                likeCounter = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        likesCountLabel.setText(likeCounter + " J'aime");
+    }
+
+    private void setCommentsCountLabel() {
+        Connection connection;
+        int commentsCounter = 0;
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT COUNT(*) FROM comments WHERE postID = " + post.getPostId();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(request);
+            if(rs.next()) {
+                commentsCounter = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        commentsCountLabel.setText(commentsCounter + " Commentaires");
     }
 
     private void setDescriptionLabel() {
@@ -168,9 +201,8 @@ public class PostViewController implements Initializable {
             String request = "SELECT content FROM descriptions WHERE postID = " + post.getPostId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
-            while(rs.next()) {
+            if(rs.next()) {
                 description = rs.getString(1);
-                break;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -185,9 +217,12 @@ public class PostViewController implements Initializable {
 
 
     public void handleComments() throws Exception {
-        this.passPost = post;
+        passPost = post;
         Helpers.runAnotherApp(CommentsView.class);
     }
+
+
+
     public void handleLike() throws SQLException {
         Connection connection;
         connection = Helpers.getConnection();
@@ -196,7 +231,7 @@ public class PostViewController implements Initializable {
             likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])+1 +" J'aime");
 
             try {
-                String requestForLike = "INSERT INTO likes(postID, userID, publishDate)"+" values(?,?,?);";
+                String requestForLike = "INSERT INTO likes(postID, userID, publishDate) values(?,?,?);";
                 statementForLike = connection.prepareStatement(requestForLike);
                 statementForLike.setInt(1,post.getPostId());
                 statementForLike.setInt(2,LoginController.USER_ID);
@@ -207,19 +242,18 @@ public class PostViewController implements Initializable {
             }
         }else if(alreadyLike()){
             likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])-1 +" J'aime");
-            String requestForDislike = "DELETE FROM likes WHERE userID = "+LoginController.USER_ID + " AND postID = " + post.getPostId();
+            String requestForDislike = "DELETE FROM likes WHERE userID = " + LoginController.USER_ID +
+                    " AND postID = " + post.getPostId();
             connection.createStatement().executeQuery(requestForDislike);
         }
     }
     public boolean alreadyLike() throws SQLException {
         Connection connection;
         connection = Helpers.getConnection();
-        String alreadyLike = "SELECT * FROM likes WHERE userID = "+LoginController.USER_ID + " AND postID = " + post.getPostId();
+        String alreadyLike = "SELECT * FROM likes WHERE userID = "+ LoginController.USER_ID +
+                " AND postID = " + post.getPostId();
         ResultSet rs = connection.createStatement().executeQuery(alreadyLike);
-        while(rs.next()){
-            return true;
-        }
-        return false;
+        return rs.next();
     }
     // Initialise l'indicateur de like a l'ouverture de la fenêtre pour chaque post
     private void setLikeIndicator() throws SQLException {

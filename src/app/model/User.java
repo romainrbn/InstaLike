@@ -61,21 +61,6 @@ public class User {
         this.signUpDate = signUpDate;
     }
 
-    public static User generateExampleUser() {
-        int id = 10;
-        String profilePicture   = "https://image.freepik.com/free-photo/galaxy-system-millions-billions-stars-together-with-gas-dust_39386-369.jpg";
-        String username         = "@romainrbn";
-        String friendlyName     = "Romain";
-        Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        try {
-            date = format.parse("2018/03/17 19:29:56");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        User exampleUser = new User(id, profilePicture, username, friendlyName, date);
-        return exampleUser;
-    }
 
 
     @Override

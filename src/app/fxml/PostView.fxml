@@ -5,65 +5,105 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #ededed;" stylesheets="@../css/PostView.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.PostViewController">
-   <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;">
-         <children>
-            <VBox alignment="CENTER">
-               <children>
-                  <ImageView fx:id="profileImageView" fitHeight="42.0" fitWidth="34.0" pickOnBounds="false">
-                     <image>
-                        <Image url="@../resources/icons/paysage.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="700.0" prefWidth="800.0"
+      style="-fx-background-color: #ededed;" stylesheets="@../css/PostView.css"
+      xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.controller.PostViewController">
+   <HBox alignment="CENTER_LEFT"
+         prefHeight="100.0" prefWidth="200.0"
+         spacing="20"
+         style="-fx-padding: 0 0 0 30;">
+      <VBox alignment="CENTER">
+         <ImageView fx:id="profileImageView"
+                    fitHeight="42.0" fitWidth="34.0">
+            <Image url="@../resources/icons/paysage.jpg"/>
+         </ImageView>
+      </VBox>
 
 
-            <VBox alignment="CENTER_LEFT">
-               <children>
-                  <Label fx:id="usernameLabel" onMouseClicked="#handleUsernameClick" text="username">
-                     <font>
-                        <Font name="Arial Bold" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="locationLabel" text="location">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Label>
-               </children>
-            </VBox>
-         </children>
+      <VBox alignment="CENTER_LEFT">
+         <Label fx:id="usernameLabel"
+                onMouseClicked="#handleUsernameClick"
+                text="username">
+            <font>
+               <Font name="Arial Bold"
+                     size="18.0"
+               />
+            </font>
+         </Label>
+         <Label fx:id="locationLabel" text="location">
+            <font>
+               <Font name="Arial"
+                     size="12.0"
+               />
+            </font>
+         </Label>
+      </VBox>
+   </HBox>
+
+   <VBox>
+      <HBox alignment="TOP_CENTER">
+         <Region VBox.vgrow="ALWAYS"/>
+         <ImageView fx:id="postImageView"
+                    fitHeight="440.0" fitWidth="561.0"
+                    pickOnBounds="true"
+                    preserveRatio="true">
+         </ImageView>
       </HBox>
+   </VBox>
 
-      <VBox>
-         <children>
-            <HBox alignment="TOP_CENTER">
-               <children>
-                  <Region VBox.vgrow="ALWAYS"> </Region>
-                  <ImageView fx:id="postImageView" fitHeight="440.0" fitWidth="561.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15" style="-fx-padding: 30 30 0 30;">
-         <children>
-            <Label fx:id="descriptionLabel" style="-fx-padding: 0 0 0 10" text="Ma super description">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font></Label>
-            <HBox prefWidth="200.0">
-               <children>
-                  <ToggleButton fx:id="likeButton" style="-fx-background-color: transparent;" onAction="#handleLike"/>
-                  <Button fx:id="commentButton" style="-fx-background-color: transparent;" onAction="#handleComments" />
-               </children>
-            </HBox>
-            <Label fx:id="likesCountLabel" style="-fx-padding: 0 0 0 10" text="13 J'aime">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Label>
-         </children>
-      </VBox>
-   </children>
+   <VBox prefHeight="200.0" prefWidth="100.0"
+         spacing="15"
+         style="-fx-padding: 30 30 0 30;">
+      <Label fx:id="descriptionLabel"
+             style="-fx-padding: 0 0 0 10"
+             text="Ma super description">
+         <font>
+            <Font name="Arial"
+                  size="14.0"
+            />
+         </font>
+      </Label>
+      <HBox prefWidth="200.0">
+         <ToggleButton fx:id="likeButton"
+                       onAction="#handleLike"
+                       style="-fx-background-color: transparent;"
+         />
+         <Button fx:id="commentButton"
+                 onAction="#handleComments"
+                 style="-fx-background-color: transparent;"/>
+      </HBox>
+      <HBox spacing="15">
+         <Label fx:id="likesCountLabel"
+                style="-fx-padding: 0 0 0 10"
+                text="0 J'aime">
+            <font>
+               <Font name="Arial Bold"
+                     size="14.0"
+               />
+            </font>
+         </Label>
+         <Label fx:id="commentsCountLabel"
+                style="-fx-padding: 0 0 0 10"
+                text="0 Commentaires">
+            <font>
+               <Font name="Arial Bold"
+                     size="14.0"
+               />
+            </font>
+         </Label>
+      </HBox>
+      <Label fx:id="timestampLabel"
+             style="-fx-padding: 0 0 0 10"
+             text="xx/xx/xxxx"
+             textFill="#7e929a">
+         <font>
+            <Font name="Arial"
+                  size="11.0"
+            />
+         </font>
+      </Label>
+   </VBox>
 </VBox>

@@ -7,17 +7,15 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.controller.EditAccountViewController">
+            fx:controller="app.controller.CheckProfilViewController">
 
-    <VBox alignment="TOP_CENTER"
-          spacing="30"
+    <VBox alignment="TOP_CENTER" spacing="30"
           AnchorPane.bottomAnchor="0.0"
           AnchorPane.leftAnchor="0.0"
           AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="45.0">
         <ImageView fx:id="profileImageView"
                    fitHeight="80.0" fitWidth="80.0"
-                   onMouseClicked="#handlePictureClicked"
                    pickOnBounds="true">
             <Image url="@../resources/icons/paysage.jpg"/>
         </ImageView>
@@ -25,26 +23,21 @@
         <Label fx:id="currentFriendlyNameLabel"
                text="friendlyName">
             <font>
-                <Font name="Arial Bold"
-                      size="18.0"
-                />
+                <Font name="Arial Bold" size="18.0"/>
             </font>
         </Label>
 
-        <TextField fx:id="nameTextField" focusTraversable="false"
-                   promptText="Changer le nom d'affichage"
-        />
 
-        <Button fx:id="validateButton"
-                onAction="#validateForm"
-                text="Valider"
-        />
+        <HBox alignment="TOP_CENTER"
+              spacing="70">
 
-        <HBox alignment="TOP_CENTER" spacing="70">
+            <Label fx:id="likeSentLabel"
+                   text="0 like envoyé"
+            />
 
-            <Label fx:id="likeSentLabel" text="0 like envoyé"/>
-
-            <Label fx:id="likeReceivedLabel" text="0 like reçu"/>
+            <Label fx:id="likeReceivedLabel"
+                   text="0 like reçu"
+            />
 
         </HBox>
 

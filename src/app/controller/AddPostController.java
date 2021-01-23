@@ -21,6 +21,7 @@ public class AddPostController implements Initializable {
     private static final String HOVER_BUTTON_STYLE = "fx-background-color: #ff84a7; color: white;";
     private static final String IDLE_BUTTON_STYLE = "fx-background-color: white;";
 
+
     @FXML private Button sendPost;
     @FXML private TextField localisationTextField;
     @FXML private TextArea descriptionTextArea;
@@ -42,7 +43,6 @@ public class AddPostController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            System.out.println("Picture path : "+file.getPath());
             fileURL = file.getPath();
         }
     }
@@ -64,9 +64,9 @@ public class AddPostController implements Initializable {
 
             connection = Helpers.getConnection();
 
-            String sqlRequest = "insert into posts(userID, photoID, localisation, publishDate) " + "values(?,?,?,?);";
-            String uploadPhotoRequest = "insert into photos(publishDate, data) " + "values(?,?)";
-            String uploadDescriptionrequest = "insert into descriptions(postID, publishDate, content)" + "values(?,?,?);";
+            String sqlRequest = "insert into posts(userID, photoID, localisation, publishDate) values(?,?,?,?);";
+            String uploadPhotoRequest = "insert into photos(publishDate, data) values(?,?)";
+            String uploadDescriptionrequest = "insert into descriptions(postID, publishDate, content) values(?,?,?);";
             Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
             Statement st = connection.createStatement();
 

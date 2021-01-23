@@ -1,9 +1,7 @@
 package app.model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 public class Comment {
 

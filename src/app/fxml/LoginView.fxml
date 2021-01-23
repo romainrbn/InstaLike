@@ -7,117 +7,181 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane style="-fx-background-color: #ffffff;" stylesheets="@../css/login.css" alignment="CENTER" hgap="10" prefHeight="800" prefWidth="600" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
-   <children>
+<GridPane style="-fx-background-color: #ffffff;" stylesheets="@../css/login.css"
+          alignment="CENTER"
+          hgap="10" prefHeight="800"
+          prefWidth="600" vgap="10"
+          xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="app.controller.LoginController">
+   <GridPane alignment="TOP_CENTER"
+             hgap="10" prefHeight="800"
+             vgap="10" prefWidth="600"
+             style="-fx-padding: 20 0 0 0;"
+             GridPane.rowIndex="1"
+             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <Label alignment="CENTER"
+             style="-fx-padding: 0 0 30 0;"
+             text="Bienvenue sur InstaLike" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold"
+                  size="25.0"
+            />
+         </font>
+         <textFill>
+            <LinearGradient>
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295"
+                               green="0.18719999492168427"
+                               blue="0.5322514176368713"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834"
+                               green="0.1882352977991104"
+                               blue="0.5333333611488342"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054"
+                               green="0.2010233849287033"
+                               blue="0.2010233849287033"
+                        />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label style="-fx-padding: 60 0 30 0;" text="Partagez vos photos avec vos amis !">
+         <font>
+            <Font name="Arial"
+                  size="14.0"/>
+         </font>
+      </Label>
+      <Label text="Nom d'utilisateur :"
+             GridPane.rowIndex="2">
+         <font>
+            <Font name="Arial Bold"
+                  size="14.0"
+            />
+         </font>
+      </Label>
+      <TextField fx:id="userNameTextField"
+                 promptText="\@ParkizApp"
+                 GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+      <Label text="Mot de passe :"
+             GridPane.rowIndex="3">
+         <font>
+            <Font name="Arial Bold"
+                  size="14.0"/>
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordTextField"
+                     promptText="•••••••••"
+                     GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+      <Button fx:id="handleLogin"
+              mnemonicParsing="false"
+              onAction="#handleLogin"
+              style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;"
+              text="Connexion" GridPane.rowIndex="5">
+         <font>
+            <Font name="Arial Bold"
+                  size="14.0"
+            />
+         </font>
+         <textFill>
+            <LinearGradient>
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295"
+                               green="0.18719999492168427"
+                               blue="0.5322514176368713"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834"
+                               green="0.1882352977991104"
+                               blue="0.5333333611488342"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054"
+                               green="0.2010233849287033"
+                               blue="0.2010233849287033"
+                        />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <opaqueInsets>
+            <Insets/>
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="signUpButton"
+              mnemonicParsing="false"
+              onAction="#handleSignUp"
+              style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;"
+              text="Inscription"
+              GridPane.rowIndex="6">
+         <textFill>
+            <LinearGradient>
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7200000286102295"
+                               green="0.18719999492168427"
+                               blue="0.5322514176368713"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.007532956685499058">
+                     <color>
+                        <Color red="0.7215686440467834"
+                               green="0.1882352977991104"
+                               blue="0.5333333611488342"
+                        />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7894737124443054"
+                               green="0.2010233849287033"
+                               blue="0.2010233849287033"
+                        />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Arial Bold"
+                  size="14.0"
+            />
+         </font>
+      </Button>
 
-      <GridPane alignment="TOP_CENTER" hgap="10" prefHeight="800" prefWidth="600" style="-fx-padding: 20 0 0 0;" vgap="10" GridPane.rowIndex="1" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-         <children>
-            <Label alignment="CENTER" style="-fx-padding: 0 0 30 0;" text="Bienvenue sur InstaLike" textAlignment="CENTER">
-               <font>
-                  <Font name="Arial Bold" size="25.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007532956685499058">
-                           <color>
-                              <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-            </Label>
-            <Label style="-fx-padding: 60 0 30 0;" text="Partagez vos photos avec vos amis !">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Nom d'utilisateur :" GridPane.rowIndex="2">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Label>
-            <TextField fx:id="userNameTextField" promptText="\@ParkizApp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Mot de passe :" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Label>
-            <PasswordField fx:id="passwordTextField" promptText="•••••••••" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="handleLogin" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Connexion" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007532956685499058">
-                           <color>
-                              <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
-            <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#handleSignUp" style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;" text="Inscription" GridPane.rowIndex="6">
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.7200000286102295" green="0.18719999492168427" blue="0.5322514176368713" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.007532956685499058">
-                           <color>
-                              <Color red="0.7215686440467834" green="0.1882352977991104" blue="0.5333333611488342" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.7894737124443054" green="0.2010233849287033" blue="0.2010233849287033" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
-               <font>
-                  <Font name="Arial Bold" size="14.0" />
-               </font></Button>
+   </GridPane>
+   <HBox alignment="CENTER"
+         prefHeight="100.0" prefWidth="200.0"
+         style="-fx-padding: 50 0 0 0;"
+         GridPane.rowIndex="0">
+      <ImageView fitHeight="150.0" fitWidth="200.0"
+                 pickOnBounds="true" preserveRatio="true"
+                 GridPane.rowIndex="0">
+         <Image url="@../resources/icons/LogoInstaLike.png"/>
+      </ImageView>
+   </HBox>
 
-         </children>
-      </GridPane>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-padding: 50 0 0 0;" GridPane.rowIndex="0">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="0">
-               <image>
-                  <Image url="@../resources/icons/LogoInstaLike.png" />
-               </image></ImageView>
-         </children>
-      </HBox>
-
-   </children>
 </GridPane>

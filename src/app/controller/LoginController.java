@@ -52,20 +52,23 @@ public class LoginController implements Initializable {
         try {
             connection = Helpers.getConnection();
 
-            String sqlRequest = "SELECT * FROM users WHERE username = '"+inputUserName+"' AND password = '"+inputPassword+"'";
+            String sqlRequest = "SELECT * FROM users WHERE username = '"+inputUserName+"' AND password = '"+
+                    inputPassword+"'";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(sqlRequest);
 
-            while(rs.next()){
-                System.out.println("Utilisateur connecté");
+            if(rs.next()){
 
-                USER_ID = rs.getInt(1);
+                USER_ID = rs.getInt("userID");
 
                 Node source = (Node) event.getSource();
                 Stage sourceState = (Stage) source.getScene().getWindow();
                 sourceState.close();
 
                 try {
+                    // Remise a 0 du compteur de feed dans le cas d'une reconnexion
+                    MainView.counterForFeed=0;
+
                     Helpers.runAnotherApp(MainView.class);
                     return;
                 } catch (Exception e) {
@@ -93,8 +96,10 @@ public class LoginController implements Initializable {
     @FXML
     public void handleSignUp(ActionEvent event) {
 
-        if (!handleCheckPasswordOnSignUp(passwordTextField.getText()) || !handleCheckUsernameOnSignUp(userNameTextField.getText())) {
-            showAlert("Erreur","Inscription impossible","Le nom d'utilisateur doit contenir entre 3 et 20 caractères. " +
+        if (!handleCheckPasswordOnSignUp(passwordTextField.getText()) ||
+                !handleCheckUsernameOnSignUp(userNameTextField.getText())) {
+            showAlert("Erreur","Inscription impossible",
+                    "Le nom d'utilisateur doit contenir entre 3 et 20 caractères. " +
                     "\nLe mot de passe doit contenir au moins 6" +
                     " caractères, une majuscule et un chiffre.");
             return;
@@ -108,16 +113,18 @@ public class LoginController implements Initializable {
         try {
             connection = Helpers.getConnection();
 
-            String findAlreadyRegistered = "SELECT * FROM users WHERE username = '"+inputUserName+"' AND password = '"+inputPassword+"'";
+            String findAlreadyRegistered = "SELECT * FROM users WHERE username = '"+inputUserName+"' " +
+                    "AND password = '"+ inputPassword+"'";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(findAlreadyRegistered);
 
-            while(rs.next()){
+            if(rs.next()){
                 showAlert("Erreur","Inscription impossible","L'utilisateur existe déjà");
                 return;
             }
 
-            String sqlRequest = "insert into users(photoID, username, friendlyName, password, isAdmin) " + "values(?,?,?,?,?);";
+            String sqlRequest = "insert into users(photoID, username, friendlyName, password, isAdmin) " +
+                    "values(?,?,?,?,?);";
 
             statement = connection.prepareStatement(sqlRequest);
 
@@ -128,7 +135,8 @@ public class LoginController implements Initializable {
             statement.setInt(5, 0);
             statement.executeUpdate();
 
-            String findIdNewUser = "SELECT * FROM users WHERE username = '"+inputUserName+"' AND password = '"+inputPassword+"'";
+            String findIdNewUser = "SELECT * FROM users WHERE username = '" + inputUserName + "'" +
+                    " AND password = '" + inputPassword + "'";
             Statement st2 = connection.createStatement();
             ResultSet rs2 = st2.executeQuery(findIdNewUser);
 
@@ -149,15 +157,16 @@ public class LoginController implements Initializable {
             }
         }
 
-        currentUser = User.generateExampleUser();
 
-        System.out.println("Handle sign up succeed with " + userNameTextField.getText() + " and " + passwordTextField.getText());
+        System.out.println("Handle sign up succeed with " + userNameTextField.getText() + " and " +
+                passwordTextField.getText());
 
         Node source = (Node) event.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();
         sourceState.close();
 
         try {
+            MainView.counterForFeed=0;
             Helpers.runAnotherApp(MainView.class);
         } catch (Exception e) {
             e.printStackTrace();

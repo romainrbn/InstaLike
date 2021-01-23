@@ -9,12 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import javax.xml.transform.Result;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,13 +53,15 @@ public class EditAccountViewController implements Initializable {
         }
     }
 
+    private final int currentUser = LoginController.USER_ID; // L'utilisateur à modifier
+
     private File newImage;
 
     private boolean hasChangedImage = false;
 
-    private int currentUser = LoginController.USER_ID; // L'utilisateur à modifier
 
-    @FXML public void handlePictureClicked(MouseEvent event) {
+
+    @FXML public void handlePictureClicked() {
         String newImagePath = chooseFileFromFinder();
         assert newImagePath != null;
 
@@ -116,10 +117,8 @@ public class EditAccountViewController implements Initializable {
                 }
 
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -149,7 +148,8 @@ public class EditAccountViewController implements Initializable {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(findAllPostsRequest);
            while (resultSet.next()){
-               String countLikeReceivedRequest = "SELECT COUNT(*) FROM likes WHERE postID = " + resultSet.getInt("postID");
+               String countLikeReceivedRequest = "SELECT COUNT(*) FROM likes WHERE postID = " +
+                       resultSet.getInt("postID");
                Statement statementForCounter = connection.createStatement();
                ResultSet resultSetCounter = statementForCounter.executeQuery(countLikeReceivedRequest);
                while (resultSetCounter.next()){
@@ -223,7 +223,6 @@ public class EditAccountViewController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            System.out.println("Picture path : "+file.getPath());
             return file.getPath();
         }
         return null;
