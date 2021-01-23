@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class EditAccountView extends Application {
@@ -20,10 +18,6 @@ public class EditAccountView extends Application {
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(400);
         primaryStage.show();
-
-        ImageView profileImageView = (ImageView) loader.getNamespace().get("profileImageView");
-        Circle clip = new Circle(profileImageView.getFitWidth());
-        profileImageView.setClip(clip);
     }
 
     public static void main(String[] args) {
