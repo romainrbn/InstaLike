@@ -31,7 +31,6 @@ public class CommentViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Helpers.maskRoundImage(profileImageView);
     }
 
     public void initializeComment(Comment comment, Post post) throws Exception {
