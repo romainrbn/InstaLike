@@ -14,7 +14,7 @@
             fx:controller="app.controller.CommentViewController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;">
+    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
         <children>
 
             <VBox alignment="CENTER_LEFT">
