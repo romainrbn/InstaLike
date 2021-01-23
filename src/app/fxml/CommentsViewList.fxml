@@ -3,9 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CommentsViewListController">
+<ScrollPane fx:id="scrollComments" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.CommentsViewListController">
 
     <VBox fx:id="commentsList" spacing="15" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
         <children>
             <HBox alignment="CENTER" spacing="20" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" style="-fx-padding: 15 0">
                 <TextField fx:id="newCommentTextField" promptText="Ajouter un commentaire" />
@@ -15,4 +16,4 @@
     </VBox>
 
 
-</AnchorPane>
+</ScrollPane>

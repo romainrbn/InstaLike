@@ -14,10 +14,15 @@ public class EditAccountView extends Application {
         Parent root = loader.load();
         primaryStage.setTitle("Modifier compte");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
-        primaryStage.setScene(new Scene(root, 400, 400));
-        primaryStage.setMinWidth(400);
-        primaryStage.setMinHeight(400);
+        primaryStage.setScene(new Scene(root, 400, 600));
+        primaryStage.setMinWidth(300);
+        primaryStage.setMinHeight(500);
+        primaryStage.setMaxWidth(400);
+        primaryStage.setMaxHeight(600);
+        primaryStage.requestFocus();
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {

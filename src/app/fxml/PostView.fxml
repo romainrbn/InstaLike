@@ -11,7 +11,7 @@
          <children>
             <VBox alignment="CENTER">
                <children>
-                  <ImageView fx:id="profileImageView" fitHeight="42.0" fitWidth="34.0" pickOnBounds="true">
+                  <ImageView fx:id="profileImageView" fitHeight="42.0" fitWidth="34.0" pickOnBounds="false">
                      <image>
                         <Image url="@../resources/icons/paysage.jpg" />
                      </image>

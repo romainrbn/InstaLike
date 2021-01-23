@@ -12,21 +12,24 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="app.controller.CommentViewController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="800.0">
 
-    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
+    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="800.0" spacing="20" style="-fx-padding: 0 0 0 30;" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0">
         <children>
 
             <VBox alignment="CENTER_LEFT">
                 <children>
-                    <Label fx:id="userNameLabel" text="username">
+                    <Label fx:id="userNameLabel" text="username"
+                    ellipsisString="username">
                         <font>
                             <Font name="Arial Bold" size="18.0" />
                         </font></Label>
                 </children>
             </VBox>
 
-            <Label fx:id="commentLabel">
+
+            <Label fx:id="commentLabel"
+            wrapText="true">
                 Contenu du commentaire
             </Label>
         </children>

@@ -24,10 +24,19 @@
                       <Insets bottom="30.0" left="0.0" right="0.0" top="0.0" />
                     </padding>
                   </StackPane>
-            <Button fx:id="homeButton" accessibleText="Retourner à l'accueil" alignment="CENTER" mnemonicParsing="false" onAction="#handleSetHome" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Accueil" textAlignment="RIGHT">
+            <Button fx:id="homeButton"
+                    accessibleText="Voir plus de photo"
+                    alignment="CENTER"
+                    mnemonicParsing="false"
+                    onAction="#handleMorePosts"
+                    style="-fx-background-color: #ffffff;"
+                    styleClass="stack-button"
+                    text="Voir plus de posts"
+                    textAlignment="RIGHT">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
-                     </font></Button>
+                     </font>
+            </Button>
               <Button fx:id="accountButton" accessibleText="Compte" alignment="CENTER" mnemonicParsing="false" onAction="#handleAccount" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Compte" textAlignment="RIGHT">
                   <font>
                       <Font name="Arial Bold" size="18.0" />

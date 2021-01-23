@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,11 +32,23 @@ public class EditAccountViewController implements Initializable {
     @FXML
     private TextField nameTextField;
 
+    @FXML
+    private Label currentFriendlyNameLabel;
+
+    @FXML
+    private Label likeSentLabel;
+
+    @FXML
+    private Label likeReceivedLabel;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Helpers.maskRoundImage(profileImageView);
         try {
-            loadImageFromServer();
+            loadImageAndFriendlynameFromServer();
+            loadLikeSent();
+            loadLikeReceived();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,8 +79,11 @@ public class EditAccountViewController implements Initializable {
 
     @FXML
     public void validateForm(ActionEvent actionEvent) throws Exception {
-        // Fermer la fenêtre
-        String newName = nameTextField.getText();
+        //Changement du nom d'affichage (frirendlyName)
+        String newName = currentFriendlyNameLabel.getText();
+        if(!nameTextField.getText().trim().isEmpty()){
+            newName = nameTextField.getText();
+        }
 
         executeServerRequest(newName, newImage);
 
@@ -77,18 +93,18 @@ public class EditAccountViewController implements Initializable {
         sourceState.close();
     }
 
-    private void loadImageFromServer() throws Exception {
+    private void loadImageAndFriendlynameFromServer()  {
         Connection connection;
 
         try {
             connection = Helpers.getConnection();
-            String request = "SELECT photoID FROM users WHERE userID = " + currentUser;
+            String request = "SELECT photoID, friendlyName FROM users WHERE userID = " + currentUser;
             Statement st = connection.createStatement();
             ResultSet getPhotoIdRs = st.executeQuery(request);
 
             if(getPhotoIdRs.next()) {
                 int photoIndex = getPhotoIdRs.getInt(1);
-
+                currentFriendlyNameLabel.setText(getPhotoIdRs.getString(2));
                 String getPhoto = "SELECT * FROM photos WHERE photoID = " + photoIndex;
                 ResultSet rs = st.executeQuery(getPhoto);
                 if(rs.next()){
@@ -107,6 +123,45 @@ public class EditAccountViewController implements Initializable {
         }
     }
 
+    private void loadLikeSent(){
+        Connection connection;
+        try {
+            connection = Helpers.getConnection();
+            String request = "SELECT COUNT(*) FROM likes WHERE userID = " + currentUser;
+            Statement st = connection.createStatement();
+            ResultSet getLikeResult = st.executeQuery(request);
+
+            if(getLikeResult.next()) {
+                int likeSentCounter = getLikeResult.getInt(1);
+                likeSentLabel.setText(likeSentCounter + " J'aime envoyé");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private void loadLikeReceived(){
+        Connection connection;
+        int likeReceivedCounter = 0;
+        try{
+           connection = Helpers.getConnection();
+           String findAllPostsRequest = "SELECT * FROM posts WHERE userID = " + currentUser;
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery(findAllPostsRequest);
+           while (resultSet.next()){
+               String countLikeReceivedRequest = "SELECT COUNT(*) FROM likes WHERE postID = " + resultSet.getInt("postID");
+               Statement statementForCounter = connection.createStatement();
+               ResultSet resultSetCounter = statementForCounter.executeQuery(countLikeReceivedRequest);
+               while (resultSetCounter.next()){
+                   likeReceivedCounter+=resultSetCounter.getInt(1);
+               }
+           }
+           likeReceivedLabel.setText(likeReceivedCounter+" J'aime reçu");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     private void executeServerRequest(String friendlyName, File file) throws Exception {
         Connection connection;
         PreparedStatement friendlyNameStatement;
@@ -119,7 +174,7 @@ public class EditAccountViewController implements Initializable {
         try {
             connection = Helpers.getConnection();
             Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
-            inputStream = new FileInputStream(file);
+
 
             String sqlRequestDescription = "UPDATE users SET friendlyName = (?) WHERE userID =" + currentUser;
             String uploadPhotoRequest = "INSERT INTO photos(publishDate, data) values(?,?)";
@@ -129,6 +184,13 @@ public class EditAccountViewController implements Initializable {
             friendlyNameStatement = connection.prepareStatement(sqlRequestDescription);
             friendlyNameStatement.setString(1, friendlyName);
             friendlyNameStatement.executeUpdate();
+
+            //Si chnage uniquement son friendlyName
+            if(!hasChangedImage){
+                return;
+            }
+
+            inputStream = new FileInputStream(file);
 
             photoStatement = connection.prepareStatement(uploadPhotoRequest);
             photoStatement.setTimestamp(1, currentTime);

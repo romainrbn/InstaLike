@@ -46,6 +46,9 @@ public class PostViewController implements Initializable {
 
     public static Post passPost;
 
+    private int profilPhotoID = 0;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -64,9 +67,9 @@ public class PostViewController implements Initializable {
         setLocationLabel();
         setLikesCountLabel();
         setDescriptionLabel();
-        setProfileImageView();
         setLikeIndicator();
         setPostImage();
+        setProfileImageView();
     }
 
     public void setAuthor(User author) {
@@ -78,13 +81,12 @@ public class PostViewController implements Initializable {
         System.out.println("Show user profile");
     }
 
-    public void setPostImage() throws Exception {
+    public void setPostImage() {
         Connection connection;
         assert post != null;
         try{
             connection = Helpers.getConnection();
             String requestPicture = "SELECT * FROM photos WHERE photoID = " + post.getPhotoId();
-//            System.out.println(post.getPhotoId());
             ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
             if(resultSet.next()){
                 Blob blob = resultSet.getBlob("data");
@@ -97,16 +99,27 @@ public class PostViewController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        String url =  "https://www.competencephoto.com/photo/art/grande/31056991-29406133.jpg";
-//      //  FileInputStream input = new FileInputStream("src/app/resources/icons/paysage.jpg");
-//        Image postImage = new Image(url);
-//        postImageView.setImage(postImage);
     }
 
     public void setProfileImageView() {
-     //   String url = post.getUserId().getProfilePicture();
-        Image profileImage = new Image("https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg");
-        profileImageView.setImage(profileImage);
+        Connection connection;
+        assert post != null;
+        try{
+            connection = Helpers.getConnection();
+
+            String requestPicture = "SELECT * FROM photos WHERE photoID = " + profilPhotoID;
+            ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
+            if(resultSet.next()){
+                Blob blob = resultSet.getBlob("data");
+                InputStream is = blob.getBinaryStream();
+                BufferedImage bufferedImage = ImageIO.read(is);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                profileImageView.setImage(image);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setAuthorLabel() {
@@ -114,11 +127,12 @@ public class PostViewController implements Initializable {
         String username = "";
         try {
             connection = Helpers.getConnection();
-            String request = "SELECT username FROM users WHERE userID = " + post.getUserId();
+            String request = "SELECT photoID, friendlyName FROM users WHERE userID = " + post.getUserId();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
             while(rs.next()) {
-                username = rs.getString(1);
+                username = rs.getString(2);
+                profilPhotoID = rs.getInt(1);
                 break;
             }
         } catch (SQLException e) {

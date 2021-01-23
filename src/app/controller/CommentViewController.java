@@ -50,13 +50,15 @@ public class CommentViewController implements Initializable {
             ResultSet rs = statement.executeQuery(request);
             while (rs.next()) {
                 userId = rs.getInt("userID");
-                commentLabel.setText(rs.getString("content"));
+                commentLabel.setText(this.comment.getCommentValue());
 
-                String userIDRequest = "SELECT * FROM users where userID = " + userId;
+                String userIDRequest = "SELECT * FROM users where userID = " + this.comment.getUserID();
                 ResultSet userIDResultSet = statement.executeQuery(userIDRequest);
 
                 while(userIDResultSet.next()) {
-                    userNameLabel.setText(userIDResultSet.getString("username"));
+                    String username = userIDResultSet.getString("friendlyName");
+                    userNameLabel.setText(username);
+                    userNameLabel.setEllipsisString(username);
                 }
                 break;
             }

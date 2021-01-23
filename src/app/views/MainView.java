@@ -4,6 +4,7 @@ import app.controller.Helpers;
 import app.controller.PostViewController;
 import app.model.Post;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,16 +14,21 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainView extends Application {
 
+    public static FXMLLoader loader;
+    public static int counterForFeed = 0;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/MainView.fxml"));
+        loader = new FXMLLoader(getClass().getResource("../fxml/MainView.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
@@ -31,7 +37,7 @@ public class MainView extends Application {
         primaryStage.setMinWidth(1150);
         primaryStage.setMinHeight(800);
         primaryStage.show();
-
+        afficherPosts();
         setupUI(loader);
 
     }
@@ -55,26 +61,15 @@ public class MainView extends Application {
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
 
-        VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
 
-        System.out.println("PRINT GETPOST" + getPosts().toString());
+
+
 
         // Display each post
-        for (int i = 0; i < getPosts().size() ; i++) {
 
-            FXMLLoader postViewLoader = new FXMLLoader(getClass().getResource("../fxml/PostView.fxml"));
-
-            Parent postViewRoot = postViewLoader.load();
-            postViewRoot.setId(Integer.toString(i));
-
-            PostViewController controller = (PostViewController) postViewLoader.getController();
-            controller.initializePost(getPosts().get(i));
-
-            postsBox.getChildren().add(postViewRoot);
-        }
     }
 
-    private List<Post> getPosts() {
+    private static List<Post> getPosts() {
         Connection connection;
         List<Post> posts = new ArrayList<>();
 
@@ -82,7 +77,7 @@ public class MainView extends Application {
             connection = Helpers.getConnection();
 
             // Obtenir les 3 derniers éléments de la liste de posts.
-            String request = "SELECT * FROM posts ORDER BY postID DESC LIMIT 3";
+            String request = "SELECT * FROM posts ORDER BY postID DESC"; //LIMIT 3
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(request);
 
@@ -113,6 +108,35 @@ public class MainView extends Application {
         }
 
         return posts;
+    }
+
+    public static void afficherPosts() throws Exception {
+
+        // Vérification si on ne veut pas affiché plus de post de ce qu'il en existe
+        if(counterForFeed>getPosts().size()){
+            return;
+        }
+        // On affiche uniquement les photos qui ne sont pas déjà dans le feed
+        for (int i = counterForFeed; i < 3+counterForFeed ; i++) {
+            // Si on dépasse le nombre de post voulu avec le nombre de post existant
+            if(i==getPosts().size()){
+                counterForFeed+=3;
+                return;
+            }
+
+            VBox postsBox = (VBox) loader.getNamespace().get("postsBox");
+            FXMLLoader postViewLoader = new FXMLLoader(MainView.class.getResource("../fxml/PostView.fxml"));
+
+            Parent postViewRoot = postViewLoader.load();
+            postViewRoot.setId(Integer.toString(i));
+
+            PostViewController controller = (PostViewController) postViewLoader.getController();
+            controller.initializePost(getPosts().get(i));
+
+            postsBox.getChildren().add(postViewRoot);
+        }
+        // On affichera 3 nouveaux post si rappel de la fonction
+        counterForFeed+=3;
     }
 
     public static void main(String[] args) {

@@ -52,13 +52,13 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void handleSetHome() {
-        System.out.println("Go home");
+    public void handleMorePosts() throws Exception {
+        MainView.afficherPosts();
     }
 
     @FXML
     public void handleAccount() {
-        System.out.println("Go account");
+
         try {
             Helpers.runAnotherApp(EditAccountView.class);
         } catch (Exception e) {
