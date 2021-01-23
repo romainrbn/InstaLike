@@ -12,7 +12,7 @@ public class EditAccountView extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/EditAccountView.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Commentaires");
+        primaryStage.setTitle("Modifier compte");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.setMinWidth(400);
