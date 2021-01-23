@@ -31,33 +31,67 @@
               <Button fx:id="accountButton" accessibleText="Compte" alignment="CENTER" mnemonicParsing="false" onAction="#handleAccount" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Compte" textAlignment="RIGHT">
                   <font>
                       <Font name="Arial Bold" size="18.0" />
-                  </font></Button>
-              <Button fx:id="addButton" accessibleText="Ajouter une photo" mnemonicParsing="false" onAction="#handleAddPicture" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Ajouter une photo" textAlignment="CENTER">
+                  </font>
+              </Button>
+              <Button fx:id="addButton"
+                      accessibleText="Ajouter une photo"
+                      mnemonicParsing="false"
+                      onAction="#handleAddPicture"
+                      style="-fx-background-color: #ffffff;"
+                      styleClass="stack-button"
+                      text="Ajouter une photo" textAlignment="CENTER">
                   <font>
                       <Font name="Arial Bold" size="18.0" />
-                  </font></Button>
-            <Button fx:id="signOutButton" accessibleText="Déconnexion" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #ffffff;" styleClass="stack-button" text="Déconnexion" textAlignment="CENTER">
+                  </font>
+              </Button>
+            <Button fx:id="signOutButton"
+                    accessibleText="Déconnexion"
+                    mnemonicParsing="false"
+                    onAction="#handleLogout"
+                    style="-fx-background-color: #ffffff;"
+                    styleClass="stack-button" text="Déconnexion"
+                    textAlignment="CENTER">
                      <font>
                         <Font name="Arial Bold" size="18.0" />
-                     </font></Button>
+                     </font>
+            </Button>
 
               <Region VBox.vgrow="ALWAYS"> </Region>
-              <Label style="-fx-label-padding: 0 10 30 10;" text="© 2021 LE DIZÈS Thibaut, LEBLED Arthur, LAURENT Antoine, LEFAY Paul, RABOUAN Romain, GISLARD Paulin" textAlignment="CENTER" underline="true" wrapText="true">
+              <Label style="-fx-label-padding: 0 10 30 10;"
+                     text="© 2021 LE DIZÈS Thibaut, LEBLED Arthur, LAURENT Antoine, LEFAY Paul, RABOUAN Romain, GISLARD Paulin"
+                     textAlignment="CENTER"
+                     underline="true"
+                     wrapText="true">
                      <font>
                         <Font size="9.0" />
-                     </font></Label>
+                     </font>
+              </Label>
           </children>
         </VBox>
       </children>
     </AnchorPane>
 
 
-    <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+    <AnchorPane fx:id="rightPane"
+                minHeight="0.0"
+                minWidth="0.0"
+                prefHeight="160.0"
+                prefWidth="100.0">
       <children>
-        <ScrollPane fx:id="RightScroll" prefHeight="398.0" prefWidth="416.0">
+        <ScrollPane fx:id="RightScroll"
+                    prefHeight="398.0"
+                    prefWidth="416.0">
           <content>
 
-                        <VBox fx:id="postsBox" alignment="TOP_CENTER" layoutX="199.0" layoutY="23.0" spacing="15" style="-fx-padding: 30 0 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                        <VBox fx:id="postsBox"
+                              alignment="TOP_CENTER"
+                              layoutX="199.0" layoutY="23.0"
+                              spacing="15"
+                              style="-fx-padding: 30 0 0 0;"
+                              AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.leftAnchor="0.0"
+                              AnchorPane.rightAnchor="0.0"
+                              AnchorPane.topAnchor="30.0">
                            <children>
                            </children>
                         </VBox>

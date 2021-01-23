@@ -70,9 +70,6 @@ public class MainView extends Application {
             PostViewController controller = (PostViewController) postViewLoader.getController();
             controller.initializePost(getPosts().get(i));
 
-
-
-
             postsBox.getChildren().add(postViewRoot);
         }
     }

@@ -16,7 +16,6 @@
                         <Image url="@../resources/icons/paysage.jpg" />
                      </image>
                   </ImageView>
-
                </children>
             </VBox>
 

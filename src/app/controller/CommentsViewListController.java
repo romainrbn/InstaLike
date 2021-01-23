@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CommentsViewController implements Initializable {
+public class CommentsViewListController implements Initializable {
 
     @FXML
     private ImageView profileImageView;
