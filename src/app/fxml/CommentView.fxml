@@ -16,28 +16,17 @@
 
     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20" style="-fx-padding: 0 0 0 30;">
         <children>
-            <VBox alignment="CENTER">
-                <children>
-                    <ImageView fx:id="profileImageView" fitHeight="42.0" fitWidth="34.0" pickOnBounds="true">
-                        <image>
-                            <Image url="@../resources/icons/paysage.jpg" />
-                        </image>
-                    </ImageView>
-
-                </children>
-            </VBox>
-
 
             <VBox alignment="CENTER_LEFT">
                 <children>
-                    <Label fx:id="usernameLabel" text="username">
+                    <Label fx:id="userNameLabel" text="username">
                         <font>
                             <Font name="Arial Bold" size="18.0" />
                         </font></Label>
                 </children>
             </VBox>
 
-            <Label>
+            <Label fx:id="commentLabel">
                 Contenu du commentaire
             </Label>
         </children>

@@ -44,6 +44,8 @@ public class PostViewController implements Initializable {
     private static final String HOVER_BUTTON_STYLE = "";
     private static final String IDLE_BUTTON_STYLE = "";
 
+    public static Post passPost;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -169,6 +171,7 @@ public class PostViewController implements Initializable {
 
 
     public void handleComments() throws Exception {
+        this.passPost = post;
         Helpers.runAnotherApp(CommentsView.class);
     }
     public void handleLike() throws SQLException {

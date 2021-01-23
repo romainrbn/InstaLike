@@ -132,18 +132,7 @@ public class Post {
                 ", description='" + description + '\'' +
                 '}';
     }
-
-
     public enum PostState {
         POSTED, DELETED
     }
-
-    public static Post generateExamplePost() {
-        return new Post(1, 0, 1, new Date(),
-                Comment.generateExampleComments(), Like.generateRandomLikes(), "Angers, France",
-                Post.PostState.POSTED, true, "Ma super description");
-    }
-
-
-
 }
