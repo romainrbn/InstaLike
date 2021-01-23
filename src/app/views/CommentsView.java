@@ -14,7 +14,7 @@ public class CommentsView extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/CommentsView.fxml"));
         primaryStage.setTitle("Commentaires");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("LogoInstaLike.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("../resources/icons/LogoInstaLike.png")));
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(400);
