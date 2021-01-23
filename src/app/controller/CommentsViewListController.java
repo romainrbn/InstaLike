@@ -9,11 +9,9 @@ import java.util.ResourceBundle;
 
 public class CommentsViewListController implements Initializable {
 
-    @FXML
-    private ImageView profileImageView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Helpers.maskRoundImage(profileImageView);
+
     }
 }
