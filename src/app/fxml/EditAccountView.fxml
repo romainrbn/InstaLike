@@ -19,6 +19,14 @@
 
             <Button fx:id="validateButton" onAction="#validateForm" text="Valider" />
 
+            <HBox spacing="70" alignment="TOP_CENTER">
+
+                <Label fx:id="likeSend" text="0 like envoyé"/>
+
+                <Label fx:id="likeRecu" text="0 like reçu"/>
+
+            </HBox>
+
         </children>
     </VBox>
 </AnchorPane>
