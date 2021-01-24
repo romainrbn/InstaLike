@@ -105,8 +105,10 @@ public class AddPostController implements Initializable {
 
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException: - " + e);
+            Helpers.showAlert("Erreur","Une erreur est survenue",e.getMessage());
         } catch (SQLException e) {
             System.out.println("SQLException: - " + e);
+            Helpers.showAlert("Erreur","Une erreur est survenue",e.getMessage());
         } finally {
             try {
                 assert  connection != null;
@@ -115,6 +117,7 @@ public class AddPostController implements Initializable {
                 statement.close();
             } catch (SQLException e) {
                 System.out.println("SQLException Finally: - " + e);
+                Helpers.showAlert("Erreur","Une erreur est survenue",e.getMessage());
             }
         }
     }

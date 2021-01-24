@@ -5,6 +5,9 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.paint.Color?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="app.controller.EditAccountViewController">
@@ -32,13 +35,51 @@
         </Label>
 
         <TextField fx:id="nameTextField" focusTraversable="false"
-                   promptText="Changer le nom d'affichage"
+                   promptText="Changer le nom affiché sur l'application"
         />
 
         <Button fx:id="validateButton"
+                mnemonicParsing="false"
                 onAction="#validateForm"
+                style="-fx-background-color: rgba(227, 227, 227, 1.0); -fx-background-radius: 10px;"
                 text="Valider"
-        />
+                GridPane.rowIndex="6">
+            <textFill>
+                <LinearGradient>
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.7200000286102295"
+                                       green="0.18719999492168427"
+                                       blue="0.5322514176368713"
+                                />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.007532956685499058">
+                            <color>
+                                <Color red="0.7215686440467834"
+                                       green="0.1882352977991104"
+                                       blue="0.5333333611488342"
+                                />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7894737124443054"
+                                       green="0.2010233849287033"
+                                       blue="0.2010233849287033"
+                                />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <font>
+                <Font name="Arial Bold"
+                      size="14.0"
+                />
+            </font>
+        </Button>
 
         <HBox alignment="TOP_CENTER" spacing="70">
 

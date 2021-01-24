@@ -45,9 +45,16 @@ public class CheckProfilViewController implements Initializable {
         Connection connection;
 
         try {
-            connection = Helpers.getConnection();
             String request = "SELECT photoID, friendlyName FROM users WHERE userID = " +
                     PostViewController.passPost.getUserId();
+
+            // Si l'utilisateur clique sur l'auteur d'un commentaire
+            if (CommentViewController.passComment !=null){
+                request = "SELECT photoID, friendlyName FROM users WHERE userID = " +
+                        CommentViewController.passComment.getUserID();
+            }
+
+            connection = Helpers.getConnection();
             Statement st = connection.createStatement();
             ResultSet getPhotoIdRs = st.executeQuery(request);
 
@@ -74,6 +81,13 @@ public class CheckProfilViewController implements Initializable {
         try {
             connection = Helpers.getConnection();
             String request = "SELECT COUNT(*) FROM likes WHERE userID = " + PostViewController.passPost.getUserId();
+
+            // Si l'utilisateur clique sur l'auteur d'un commentaire
+            if (CommentViewController.passComment !=null){
+                request = "SELECT COUNT(*) FROM likes WHERE userID =  " +
+                        CommentViewController.passComment.getUserID();
+            }
+
             Statement st = connection.createStatement();
             ResultSet getLikeResult = st.executeQuery(request);
 
@@ -93,6 +107,13 @@ public class CheckProfilViewController implements Initializable {
         try {
             connection = Helpers.getConnection();
             String findAllPostsRequest = "SELECT * FROM posts WHERE userID = " + PostViewController.passPost.getUserId();
+
+            // Si l'utilisateur clique sur l'auteur d'un commentaire
+            if (CommentViewController.passComment !=null){
+                findAllPostsRequest = "SELECT * FROM posts WHERE userID =  " +
+                        CommentViewController.passComment.getUserID();
+            }
+
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(findAllPostsRequest);
             while (resultSet.next()){

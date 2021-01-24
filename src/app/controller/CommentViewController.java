@@ -2,6 +2,7 @@ package app.controller;
 
 import app.model.Comment;
 import app.model.Post;
+import app.views.CheckProfilView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,6 +24,8 @@ public class CommentViewController implements Initializable {
     @FXML
     Label commentLabel;
 
+    public static Comment passComment;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
@@ -31,6 +34,12 @@ public class CommentViewController implements Initializable {
         this.comment = comment;
         this.post = post;
         setCommentContent();
+    }
+
+    @FXML
+    public void handleUsernameClicked() throws Exception {
+        passComment=comment;
+        Helpers.runAnotherApp(CheckProfilView.class);
     }
 
     private void setCommentContent()  {

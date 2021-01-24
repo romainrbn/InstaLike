@@ -125,6 +125,7 @@ public class LoginController implements Initializable {
 
             String sqlRequest = "insert into users(photoID, username, friendlyName, password, isAdmin) " +
                     "values(?,?,?,?,?);";
+            Timestamp currentTime = java.sql.Timestamp.from(java.time.Instant.now());
 
             statement = connection.prepareStatement(sqlRequest);
 
@@ -133,6 +134,8 @@ public class LoginController implements Initializable {
             statement.setString(3, inputUserName);
             statement.setString(4, inputPassword);
             statement.setInt(5, 0);
+//            statement.setTimestamp(6,currentTime);
+//            statement.setTimestamp(7,currentTime);
             statement.executeUpdate();
 
             String findIdNewUser = "SELECT * FROM users WHERE username = '" + inputUserName + "'" +

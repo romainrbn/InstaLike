@@ -15,6 +15,7 @@
           AnchorPane.leftAnchor="0">
         <VBox alignment="CENTER_LEFT">
             <Label fx:id="userNameLabel" text="username"
+                   onMouseClicked="#handleUsernameClicked"
                    ellipsisString="username">
                 <font>
                     <Font name="Arial Bold"

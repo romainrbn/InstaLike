@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +26,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class EditAccountViewController implements Initializable {
+
 
     @FXML
     private ImageView profileImageView;
@@ -40,9 +43,19 @@ public class EditAccountViewController implements Initializable {
     @FXML
     private Label likeReceivedLabel;
 
+    @FXML
+    private Button validateButton;
+
+    private static final String HOVER_BUTTON_STYLE = "";
+    private static final String IDLE_BUTTON_STYLE = "";
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Helpers.maskRoundImage(profileImageView);
+
+        validateButton.setOnMouseEntered(e -> validateButton.setStyle(HOVER_BUTTON_STYLE));
+        validateButton.setOnMouseExited(e -> validateButton.setStyle(IDLE_BUTTON_STYLE));
+
 
         try {
             loadImageAndFriendlynameFromServer();
