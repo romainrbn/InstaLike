@@ -104,8 +104,10 @@ public class MainView extends Application {
         if(counterForFeed>getPosts().size()){
             return;
         }
+
         // On affiche uniquement les photos qui ne sont pas déjà dans le feed
         for (int i = counterForFeed; i < 3+counterForFeed ; i++) {
+
             // Si on dépasse le nombre de post voulu avec le nombre de post existant
             if(i==getPosts().size()){
                 counterForFeed+=3;
