@@ -21,13 +21,11 @@ public class AddPostController implements Initializable {
     private static final String HOVER_BUTTON_STYLE = "fx-background-color: #ff84a7; color: white;";
     private static final String IDLE_BUTTON_STYLE = "fx-background-color: white;";
 
-
     @FXML private Button sendPost;
     @FXML private TextField localisationTextField;
     @FXML private TextArea descriptionTextArea;
 
     private String fileURL;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,7 +34,7 @@ public class AddPostController implements Initializable {
     }
 
     @FXML
-    public void handleFileChooser(){
+    public void handleFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une photo à publier");
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg");
@@ -48,10 +46,10 @@ public class AddPostController implements Initializable {
     }
 
     @FXML
-    public void handlePostSend (ActionEvent event) {
+    public void handlePostSend(ActionEvent event) {
+
         String localisation = localisationTextField.getText();
         String description = descriptionTextArea.getText();
-
         Connection connection = null;
         PreparedStatement statement = null;
         PreparedStatement photoStatement;

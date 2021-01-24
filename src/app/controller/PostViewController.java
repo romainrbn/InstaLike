@@ -42,10 +42,8 @@ public class PostViewController implements Initializable {
 
     private int profilPhotoID = 0;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
 
         likeButton.setOnMouseEntered(e -> likeButton.setStyle(HOVER_BUTTON_STYLE));
         likeButton.setOnMouseExited(e -> likeButton.setStyle(IDLE_BUTTON_STYLE));
@@ -66,8 +64,6 @@ public class PostViewController implements Initializable {
         setCommentsCountLabel();
         setTimestampLabel();
     }
-
-
 
     @FXML
     public void handleUsernameClick() throws Exception {
@@ -100,10 +96,10 @@ public class PostViewController implements Initializable {
         assert post != null;
         try{
             connection = Helpers.getConnection();
-
             String requestPicture = "SELECT * FROM photos WHERE photoID = " + profilPhotoID;
             ResultSet resultSet = connection.createStatement().executeQuery(requestPicture);
-            if(resultSet.next()){
+
+            if (resultSet.next()) {
                 Blob blob = resultSet.getBlob("data");
                 InputStream is = blob.getBinaryStream();
                 BufferedImage bufferedImage = ImageIO.read(is);
@@ -154,7 +150,6 @@ public class PostViewController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     private void setLikesCountLabel() {
@@ -171,7 +166,6 @@ public class PostViewController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         likesCountLabel.setText(likeCounter + " J'aime");
     }
 
@@ -214,18 +208,15 @@ public class PostViewController implements Initializable {
         locationLabel.setText(post.getLocalisation());
     }
 
-
-
     public void handleComments() throws Exception {
         passPost = post;
         Helpers.runAnotherApp(CommentsView.class);
     }
 
-
-
     public void handleLike() throws SQLException {
         Connection connection;
         connection = Helpers.getConnection();
+
         if(likeButton.isSelected() && !alreadyLike()){
             PreparedStatement statementForLike;
             likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])+1 +" J'aime");
@@ -240,7 +231,7 @@ public class PostViewController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else if(alreadyLike()){
+        } else if(alreadyLike()){
             likesCountLabel.setText(Integer.parseInt(likesCountLabel.getText().split("\\s")[0])-1 +" J'aime");
             String requestForDislike = "DELETE FROM likes WHERE userID = " + LoginController.USER_ID +
                     " AND postID = " + post.getPostId();
@@ -255,6 +246,7 @@ public class PostViewController implements Initializable {
         ResultSet rs = connection.createStatement().executeQuery(alreadyLike);
         return rs.next();
     }
+
     // Initialise l'indicateur de like a l'ouverture de la fenêtre pour chaque post
     private void setLikeIndicator() throws SQLException {
         likeButton.setSelected(alreadyLike());

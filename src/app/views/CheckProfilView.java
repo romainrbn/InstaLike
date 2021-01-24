@@ -20,8 +20,6 @@ public class CheckProfilView extends Application {
         primaryStage.setMaxHeight(350);
         primaryStage.requestFocus();
         primaryStage.show();
-
-
     }
 
     public static void main(String[] args) {

@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentsView extends Application {
-
     VBox commentsList;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/CommentsViewList.fxml"));

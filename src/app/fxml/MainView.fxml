@@ -102,7 +102,6 @@
         </VBox>
     </AnchorPane>
 
-
     <AnchorPane fx:id="rightPane"
                 minHeight="0.0"
                 minWidth="0.0"

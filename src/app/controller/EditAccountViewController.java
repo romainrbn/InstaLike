@@ -40,10 +40,10 @@ public class EditAccountViewController implements Initializable {
     @FXML
     private Label likeReceivedLabel;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Helpers.maskRoundImage(profileImageView);
+
         try {
             loadImageAndFriendlynameFromServer();
             loadLikeSent();
@@ -58,8 +58,6 @@ public class EditAccountViewController implements Initializable {
     private File newImage;
 
     private boolean hasChangedImage = false;
-
-
 
     @FXML public void handlePictureClicked() {
         String newImagePath = chooseFileFromFinder();
@@ -80,7 +78,7 @@ public class EditAccountViewController implements Initializable {
 
     @FXML
     public void validateForm(ActionEvent actionEvent) throws Exception {
-        //Changement du nom d'affichage (frirendlyName)
+        // Changement du nom d'affichage (frirendlyName)
         String newName = currentFriendlyNameLabel.getText();
         if(!nameTextField.getText().trim().isEmpty()){
             newName = nameTextField.getText();
@@ -115,7 +113,6 @@ public class EditAccountViewController implements Initializable {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     profileImageView.setImage(image);
                 }
-
             }
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
@@ -139,9 +136,10 @@ public class EditAccountViewController implements Initializable {
         }
     }
 
-    private void loadLikeReceived(){
+    private void loadLikeReceived() {
         Connection connection;
         int likeReceivedCounter = 0;
+
         try{
            connection = Helpers.getConnection();
            String findAllPostsRequest = "SELECT * FROM posts WHERE userID = " + currentUser;
@@ -157,6 +155,7 @@ public class EditAccountViewController implements Initializable {
                }
            }
            likeReceivedLabel.setText(likeReceivedCounter+" J'aime reçu");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -167,7 +166,6 @@ public class EditAccountViewController implements Initializable {
         PreparedStatement friendlyNameStatement;
         PreparedStatement photoStatement;
         PreparedStatement photoIndexStatement;
-
         FileInputStream inputStream; // La photo à mettre sur le serveur
         int photoIndex;
 
@@ -186,7 +184,7 @@ public class EditAccountViewController implements Initializable {
             friendlyNameStatement.executeUpdate();
 
             //Si chnage uniquement son friendlyName
-            if(!hasChangedImage){
+            if (!hasChangedImage) {
                 return;
             }
 

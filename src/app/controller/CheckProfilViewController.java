@@ -20,7 +20,6 @@ public class CheckProfilViewController implements Initializable {
     @FXML
     private ImageView profileImageView;
 
-
     @FXML
     private Label currentFriendlyNameLabel;
 
@@ -29,7 +28,6 @@ public class CheckProfilViewController implements Initializable {
 
     @FXML
     private Label likeReceivedLabel;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,8 +40,6 @@ public class CheckProfilViewController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     private void loadImageAndFriendlynameFromServer()  {
         Connection connection;
@@ -67,7 +63,6 @@ public class CheckProfilViewController implements Initializable {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     profileImageView.setImage(image);
                 }
-
             }
         } catch (SQLException | IOException throwables) {
             throwables.printStackTrace();
@@ -82,7 +77,7 @@ public class CheckProfilViewController implements Initializable {
             Statement st = connection.createStatement();
             ResultSet getLikeResult = st.executeQuery(request);
 
-            if(getLikeResult.next()) {
+            if (getLikeResult.next()) {
                 int likeSentCounter = getLikeResult.getInt(1);
                 likeSentLabel.setText(likeSentCounter + " J'aime envoyé");
             }
@@ -94,7 +89,8 @@ public class CheckProfilViewController implements Initializable {
     private void loadLikeReceived(){
         Connection connection;
         int likeReceivedCounter = 0;
-        try{
+
+        try {
             connection = Helpers.getConnection();
             String findAllPostsRequest = "SELECT * FROM posts WHERE userID = " + PostViewController.passPost.getUserId();
             Statement statement = connection.createStatement();

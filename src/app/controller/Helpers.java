@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Helpers {
-
     public static boolean checkStringForSignUp(String str) {
         char ch;
         boolean capitalFlag = false;

@@ -24,11 +24,9 @@
             </Label>
         </VBox>
 
-
         <Label fx:id="commentLabel"
                wrapText="true">
             Contenu du commentaire
         </Label>
     </HBox>
-
 </AnchorPane>

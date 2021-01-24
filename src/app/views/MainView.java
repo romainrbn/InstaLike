@@ -24,7 +24,6 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         loader = new FXMLLoader(getClass().getResource("../fxml/MainView.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("InstaLike");
@@ -36,7 +35,6 @@ public class MainView extends Application {
         primaryStage.show();
         afficherPosts();
         setupUI(loader);
-
     }
 
     private void setupUI(FXMLLoader loader) {
@@ -57,13 +55,6 @@ public class MainView extends Application {
         AnchorPane.setBottomAnchor(pane, 0.0);
         AnchorPane.setLeftAnchor(pane, 0.0);
         AnchorPane.setRightAnchor(pane, 0.0);
-
-
-
-
-
-        // Display each post
-
     }
 
     private static List<Post> getPosts() {

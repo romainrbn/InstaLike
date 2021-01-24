@@ -145,21 +145,15 @@ public class LoginController implements Initializable {
             }
 
         } catch (SQLException e) {
-            System.out.println("SQLException: - " + e);
             showAlert("Erreur","Une erreur est survenue",e.getMessage());
         } finally {
             try {
                 assert connection != null;
                 connection.close();
             } catch (SQLException e) {
-                System.out.println("SQLException Finally: - " + e);
                 showAlert("Erreur","Une erreur est survenue",e.getMessage());
             }
         }
-
-
-        System.out.println("Handle sign up succeed with " + userNameTextField.getText() + " and " +
-                passwordTextField.getText());
 
         Node source = (Node) event.getSource();
         Stage sourceState = (Stage) source.getScene().getWindow();

@@ -67,14 +67,6 @@ public class UserTests {
     }
 
     @Test
-    public void testAccessorProfilePictureURL() {
-        user.setProfilePicture("https://www.parkinglot.com/profilePic");
-        assertEquals("https://www.parkinglot.com/profilePic",
-                user.getProfilePicture(),
-                "La photo de profil est fausse");
-    }
-
-    @Test
     public void testAccessorUsername() {
         user.setUsername("@Arthur_Lebled");
         assertEquals("@Arthur_Lebled",

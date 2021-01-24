@@ -57,11 +57,6 @@ public class User {
         return signUpDate;
     }
 
-    public void setSignUpDate(Date signUpDate) {
-        this.signUpDate = signUpDate;
-    }
-
-
 
     @Override
     public String toString() {

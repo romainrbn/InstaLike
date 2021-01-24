@@ -17,7 +17,6 @@ public class CommentViewController implements Initializable {
     private Comment comment;
     private Post post;
 
-
     @FXML
     Label userNameLabel;
 
@@ -36,7 +35,6 @@ public class CommentViewController implements Initializable {
 
     private void setCommentContent()  {
         // Load image from backend
-
         Connection connection;
         try {
             connection = Helpers.getConnection();
@@ -44,9 +42,7 @@ public class CommentViewController implements Initializable {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(request);
             if (rs.next()) {
-
                 commentLabel.setText(this.comment.getCommentValue());
-
                 String userIDRequest = "SELECT * FROM users where userID = " + this.comment.getUserID();
                 ResultSet userIDResultSet = statement.executeQuery(userIDRequest);
 
@@ -59,7 +55,5 @@ public class CommentViewController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
-
 }
