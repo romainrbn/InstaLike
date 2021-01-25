@@ -68,8 +68,8 @@ public class Helpers {
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            String mariaDbUrl = "jdbc:mariadb://localhost/LDCSS_dev";
-            connection = DriverManager.getConnection(mariaDbUrl,"root","");
+            String mariaDbUrl = "jdbc:mariadb://192.168.4.187:3307/LDCSS_dev";
+            connection = DriverManager.getConnection(mariaDbUrl,"ldcss2arthu","arthur");
         } catch (Exception e) {
             System.out.println("Error occured while getting the connection: - " + e);
         }

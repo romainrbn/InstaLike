@@ -22,7 +22,6 @@ public class CommentsViewListController implements Initializable {
         PreparedStatement statement;
 
         if (!newCommentTextField.getText().trim().isEmpty()) {
-
             try {
                 connection = Helpers.getConnection();
                 String sqlRequest = "insert into comments(postID,userID,publishDate,content) values(?,?,?,?)";

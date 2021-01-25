@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class PostViewController implements Initializable {
 
+
     private Post post;
 
     @FXML public ImageView postImageView;
@@ -41,6 +42,7 @@ public class PostViewController implements Initializable {
     public static Post passPost;
 
     private int profilPhotoID = 0;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

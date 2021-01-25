@@ -126,6 +126,7 @@ public class CheckProfilViewController implements Initializable {
                 }
             }
             likeReceivedLabel.setText(likeReceivedCounter+" J'aime reçu");
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

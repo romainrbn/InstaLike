@@ -40,6 +40,7 @@ public class CommentViewController implements Initializable {
     public void handleUsernameClicked() throws Exception {
         passComment=comment;
         Helpers.runAnotherApp(CheckProfilView.class);
+        passComment=null;
     }
 
     private void setCommentContent()  {

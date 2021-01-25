@@ -43,7 +43,6 @@ public class LoginController implements Initializable {
 
     @FXML
     public void handleLogin(ActionEvent event) {
-        System.out.println("Handle login with " + userNameTextField.getText() + " and " + passwordTextField.getText());
 
         Connection connection = null;
         String inputUserName = userNameTextField.getText();
