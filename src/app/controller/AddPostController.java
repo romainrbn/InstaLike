@@ -37,7 +37,7 @@ public class AddPostController implements Initializable {
     public void handleFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une photo à publier");
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {

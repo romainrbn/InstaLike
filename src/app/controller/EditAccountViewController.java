@@ -79,6 +79,11 @@ public class EditAccountViewController implements Initializable {
         // Changer `hasChangedImage` à `true` pour déclencher la requête réseau pour la photo de profil.
         hasChangedImage = true;
 
+        //S'il séléctionne pas de photo
+        if (newImagePath==null) {
+            return;
+        }
+
         // Changer l'image dans l'interface
         File file = new File(newImagePath);
         Image image = new Image(file.toURI().toString());
@@ -201,6 +206,8 @@ public class EditAccountViewController implements Initializable {
                 return;
             }
 
+
+
             inputStream = new FileInputStream(file);
 
             photoStatement = connection.prepareStatement(uploadPhotoRequest);
@@ -230,7 +237,7 @@ public class EditAccountViewController implements Initializable {
     private String chooseFileFromFinder(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choisir une photo à publier");
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image", "*.png","  *.jpg", "*.jpeg");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
